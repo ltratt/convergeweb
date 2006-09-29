@@ -1,0 +1,32 @@
+<!--#include virtual="/header.inc" -->
+
+<h1>Converge for Windows [Cygwin]</h1>
+
+<h2>Version 0.8 (2006/04/04)</h2>
+
+Please note that there appears to be a bug in Cygwin's <code>setjmp</code> / <code>longjmp</code> routines that affects Converge when run from the standard Cygwin console. However if you start an X session (via the <code>startx</code> command in Cygwin) and compile inside an <code>xterm</code>, the problem does not seem to manifest. I would be grateful for any experience reports you may have in this matter.
+
+<p>Installation steps:
+
+<ol>
+	<li>Ensure that your copy of Cygwin is upto date. If you do not have Cygwin installed, or your version is out of date Cygwin can be installed via the <a href="http://cygwin.com/setup.exe">Cygwin setup program</a> - following the defaults should be sufficient.<br><br>
+	
+	You will require two additional packages to be installed in Cygwin. In both cases the packages can be found by opening up the <code>devel</code> category in Cygwin:
+	
+		<ul>
+			<li>The latest version of both the pcre and pcre-devel packages. At the time of writing the current version in Cygwin is 4.5.1.
+			<li>The latest version of GCC. You only need to install the 'plain' GCC package.
+		</ul>
+	<li><a href="converge-0.8.tgz">Download Converge.</a>
+	<li>Download <a href="/download/contrib/cygwin/bmake.exe">bmake.exe</a> and place it in your path.
+	<li>Decompress Converge. You can either use WinZip which automatically handles and decompresses <code>.tar.gz</code> files, or use Cygwin and execute the command <code>tar xfz converge-0.8.tgz</code>.
+	<li>You now need to be in the Cygwin shell. First of all change directory to where the decompressed Converge files live: <code>cd converge-0.8</code>.
+	<li>Execute the command <code>./configure</code> [notice that this command starts with <em>dot</em> <em>slash</em>].
+	<li><code>bmake</code>. This will compile the Converge VM, Compiler and all necessary libraries.
+</ol>
+
+You may then be interested in exploring the <code>examples</code> directory which contains code you can compile and run. You can compile all the example programs by executing <code>cd examples && bmake</code> when you are in the base Converge directory.
+
+<p>At the moment the best documentation for Converge is the <a href="/documentation/quick_start/">quick start guide</a>.
+
+<!--#include virtual="/footer.inc" -->

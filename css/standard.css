@@ -1,0 +1,110 @@
+#bg {
+	margin: 0;
+	padding: 0;
+	background-color: white;
+	font-family: verdana, arial
+	}
+	
+A:link {
+	text-decoration: none;
+	color: #330099
+	}
+
+A:visited {
+	text-decoration: none
+	}
+
+A:hover {
+	text-decoration: underline;
+	color: #e00004
+	}
+
+/* Converge logo */
+
+#header-outer {
+	background-color: #DAEBFF;
+	padding: 10px 10px 10px 0;
+	width: 100%;
+	margin: 0;
+	text-align: right
+	}
+
+/* Button bar */
+
+#button-bar {
+	background-image: url('/images/s.png');
+	background-position: top;
+	background-repeat: repeat-x;
+	text-align: center
+	}
+
+#button-bar IMG {
+	height: 22px;
+	padding: 0;
+	margin: 0;
+	border: none
+	}
+	
+/* Info bar */
+
+#info-bar {
+	margin: 0 3px 0 0;
+	padding: 0 0 0 0;
+	width: 10.5em;
+	background-color: #DAEBFF;
+	font-family: sans-serif
+	}
+
+.info-bar-section {
+	padding-bottom: 20px
+	}
+
+.info-bar-section-header {
+	padding: 1px 5px 1px 20px;
+	text-indent: -10px;
+	background-color: #330099;
+	color: white;
+	font-weight: bold
+	}
+
+.info-bar-section-header A {
+	color: white
+	}
+
+.info-bar-section-entry {
+	padding: 1px 5px 0 20px;
+	text-indent: -10px;
+	font-size: smaller;
+	}
+
+/* Main page content */
+
+
+#main {
+	padding: 30px 30px 30px 30px;
+	text-align: justify
+	}
+
+#main H1, H2, H3, H4, H5, H6 {
+	font-family: sans-serif;
+	padding-left: 20px
+	}
+
+
+/* Footer */
+
+#footer {
+}
+
+#footer-inner {
+	padding: 0 10px 10px 0;
+	font-size: smaller;
+	text-align: right;
+}
+
+
+/* Useful styles */
+
+.indented-code {
+	padding-left: 20px
+	}

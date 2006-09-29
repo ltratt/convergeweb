@@ -1,0 +1,24 @@
+<!--#include virtual="/header.inc" -->
+
+<h1>Converge for Unix</h1>
+
+<h2>Version 0.2 (2004/10/04)</h2>
+
+Installation steps:
+
+<ol>
+	<li><a href="converge-0.2.tgz">Download Converge.</a>
+	<li>If you are not using BSD, you will need to download <a href="http://ftp.ten15.org/snapshot/make-latest.tar.bz2">bmake</a>, compile it and place it in your path.
+	<li>Decompress Converge <code>tar xfz converge-0.2.tgz</code>.
+	<li><code>cd converge-0.2</code>.
+	<li><code>./configure</code> [notice that this command starts with <em>dot</em> <em>slash</em>].
+	<li><code>bmake</code>. This will compile the Converge VM, Compiler and all necessary libraries.<br><br>
+	
+	You may run into memory limits with your shell whilst compiling. If so, consult your shell documentation for the <code>ulimit</code> command [or one of its pseudonyms] to increase the amount of memory available to processes.
+</ol>
+
+You may then be interested in exploring the <code>examples</code> directory which contains code you can compile and run. You can compile all the example programs by executing <code>cd examples && bmake</code> when you are in the base Converge directory.
+
+<p>At the moment the best documentation for Converge is the <a href="/documentation/quick_start/">quick start guide</a>.
+
+<!--#include virtual="/footer.inc" -->
