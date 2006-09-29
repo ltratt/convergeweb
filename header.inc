@@ -21,7 +21,7 @@
 	</table>
 	<table cellpadding="0" cellspacing="0" width="100%">
 		<tr style="height: 22px">
-			<td id="button-bar"><img src="/images/w-curve.png"><img src="/images/splitter.png"><a href="/about.html"><img src="/images/about.png"></a><img src="/images/splitter.png"><a href="download.html"><img src="/images/download.png"></a><img src="/images/splitter.png"><a href="/documentation/"><img src="/images/documentation.png"></a><img src="/images/splitter.png"><a href="/documentation/faq/"><img src="/images/faq.png"></a><img src="/images/splitter.png"><img src="/images/e-curve.png"></td>
+			<td id="button-bar"><img src="/images/w-curve.png"><img src="/images/splitter.png"><a href="/about.html"><img src="/images/about.png"></a><img src="/images/splitter.png"><a href="/download.html"><img src="/images/download.png"></a><img src="/images/splitter.png"><a href="/documentation/"><img src="/images/documentation.png"></a><img src="/images/splitter.png"><a href="/documentation/faq/"><img src="/images/faq.png"></a><img src="/images/splitter.png"><img src="/images/e-curve.png"></td>
 		</tr>
 		
 		<tr>
