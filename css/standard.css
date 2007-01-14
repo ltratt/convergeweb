@@ -19,89 +19,87 @@ A:hover {
 	color: #e00004
 	}
 
-/* Converge logo */
-
-#header-outer {
+#header-top {
 	background-color: #DAEBFF;
-	padding: 10px 10px 10px 0;
-	width: 100%;
-	margin: 0;
-	text-align: right
+	padding: 10px 0 10px
+	}
+
+#navigation-tl {
+	background-color: #DAEBFF
+	}
+
+#navigation-l {
+	vertical-align: top;
+	background-color: #DAEBFF;
+	padding: 0 8px 0 8px;
+	width: 7em;
+	font-weight: bold;
+	}
+
+#navigation-l A:link {
+	text-decoration: none;
+	color: black
+	}
+
+#navigation-l A:visited {
+	text-decoration: none;
+	color: black
 	}
 
 /* Button bar */
 
-#button-bar {
-	background-image: url('/images/s.png');
+#v {
+	background-image: url('/images/v.png');
+	background-position: left;
+	background-repeat: repeat-y;
+	text-align: center;
+	padding-right: 5px
+	}
+
+#c {
+	height: 25px;
+	width: 21px
+}
+
+#h {
+	background-image: url('/images/h.png');
 	background-position: top;
 	background-repeat: repeat-x;
-	text-align: center
-	}
-
-#button-bar IMG {
-	height: 22px;
-	padding: 0;
-	margin: 0;
-	border: none
+	text-align: center;
+	padding-right: 5px
 	}
 	
-/* Info bar */
-
-#info-bar {
-	margin: 0 3px 0 0;
-	padding: 0 0 0 0;
-	width: 10.5em;
-	background-color: #DAEBFF;
-	font-family: sans-serif
-	}
-
-.info-bar-section {
-	padding-bottom: 20px
-	}
-
-.info-bar-section-header {
-	padding: 1px 5px 1px 20px;
-	text-indent: -10px;
-	background-color: #330099;
-	color: white;
-	font-weight: bold
-	}
-
-.info-bar-section-header A {
-	color: white
-	}
-
-.info-bar-section-entry {
-	padding: 1px 5px 0 20px;
-	text-indent: -10px;
-	font-size: smaller;
-	}
-
-/* Main page content */
-
-
 #main {
-	padding: 30px 30px 30px 30px;
-	text-align: justify
+	vertical-align: top;
+	text-align: justify;
+	padding: 0 21px 0 0
 	}
 
 #main H1, H2, H3, H4, H5, H6 {
 	font-family: sans-serif;
-	padding-left: 20px
+	padding-left: 20px;
+	margin-bottom: 7px
 	}
 
 
 /* Footer */
 
-#footer {
-}
+#footer-l {
+	background-color: #DAEBFF;
+	}
+
+#footer-v {
+	background-image: url('/images/v.png');
+	background-position: left;
+	background-repeat: repeat-y;
+	text-align: center;
+	padding-right: 5px
+	}
 
 #footer-inner {
-	padding: 0 10px 10px 0;
-	font-size: smaller;
 	text-align: right;
+	padding: 10px 21px 10 21px
 }
-
 
 /* Useful styles */
 
