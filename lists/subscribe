@@ -28,7 +28,7 @@ Subject:
 """ % (email, list_email)
 
 	server = smtplib.SMTP('localhost')
-	server.sendmail(list_email, email, msg)
+	server.sendmail(email, list_email, msg)
 	server.quit()
 
 	print "%s%s." % (TYPES_MAP[type], email)
