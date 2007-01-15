@@ -3,8 +3,8 @@
 import cgi, smtplib
 
 LISTS = ["announce", "misc"]
-TYPES = ["subscribe", "unsubscribe", "help"]
-TYPES_MAP = {"subscribe" : "Sent subscription e-mail to ", "unsubscribe" : "Sent unsubscription e-mail to ", "help" : "Sent help e-mail to "}
+TYPES = ["subscribe", "subscribe-digest", "unsubscribe", "help"]
+TYPES_MAP = {"subscribe" : "Sent subscription e-mail to ", "subscribe-digest" : "Sent digest subscription e-mail to ", "unsubscribe" : "Sent unsubscription e-mail to ", "help" : "Sent help e-mail to "}
 
 
 
