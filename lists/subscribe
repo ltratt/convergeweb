@@ -11,8 +11,12 @@ TYPES_MAP = {"subscribe" : "Sent subscription e-mail to ", "unsubscribe" : "Sent
 def main():
 
 	form = cgi.FieldStorage()
-	if not (form.has_key("btn") and form.has_key("email") and form.has_key("list") and form["list"].value in LISTS and form.has_key("type") and form["type"].value in TYPES):
+	if not (form.has_key("list") and form["list"].value in LISTS and form.has_key("type") and form["type"].value in TYPES):
 		print "Incorrect parameters. Aborting."
+		return
+
+	if not form.has_key("email"):
+		print "You must specify an e-mail address."
 		return
 
 	list = form["list"].value
