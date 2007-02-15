@@ -132,7 +132,114 @@ convergel -l -o &lt;output.cvl&gt; &lt;input&gt; [... &lt;input&gt;]
 <hr>
 
 
-<h2>Objects, Classes, and functions</h2>
+<h2>Functions and scoping</h2>
+
+
+<h3>Function arguments</h3>
+
+Functions can accept zero or more arguments in the standard way. The general form of a function is thus:
+
+<p><code class="indented-code">
+func m(a<sub>i</sub>, ..., a<sub>n</sub>, a<sub>j</sub> := &lt;<em>default value</em>&gt<sub>j</sub>;, ... a<sub>m</sub> := &lt;<em>default value</em>&gt<sub>m</sub>, *v)
+</code>
+
+<p>where <em>i</em>, <em>j</em> &gt;= 0 and <code>v</code> is optional. Put another way, this means that (optionally) normal arguments are (optionally) followed by arguments with default values and (optionally) completed by a final 'var args' variable.
+
+<p>The caller of a function must specify values for all normal arguments. Arguments with default values for which no value is specified by the caller will have their default value evaluated and assigned to that arg. All remaining arguments are put into a list and assigned to <code>v</code>.
+
+<p>For example a <code>printf</code> like function would be specified as follows:
+
+<pre class="indented-code">
+func printf(format, *var_args):
+    ...
+</pre>
+
+An <code>fprintf</code> style function which defaults to using standard out might look as follows:
+
+<pre class="indented-code">
+func fprintf(format, stream := Sys::stdout, *var_args):
+    ...
+</pre>
+
+Default values are evaluated each time a value is not passed to a particular argument. This is substantially different than the mechanism found in Python. Note that Converge has no concept of function overloading based on e.g. function arity.
+
+
+<h3>Functions as <q>lambdas</q></h3>
+
+Converge does not provide any special type of a function for <q>small functions</q> such as a specialised lambda form. However sometimes the indentation syntax of Converge can be inconvenient when passing functions containing only a few expressions as arguments to another function. In such cases one can use the alternative curly bracket syntax as follows:
+
+<pre class="indented-code">
+Functional::map(func (x) { return x.to_str() }, list)
+</pre>
+
+
+<h3>Lexical scoping</h3>
+
+Converge is lexically scoped. The following program will thus print <code>0</code> then <code>1</code> then <code>1</code>.
+
+<pre class="indented-code">
+func main():
+    x := 0
+    Sys::println(x)
+    func f2():
+        Sys::println(x)
+    x := 1
+    f2()
+    Sys::println(x)
+</pre>
+
+Assignment of a variable in a block causes that variable to be made local to the block. The following program will thus print <code>0</code> then <code>0</code> then <code>0</code>.
+
+<pre class="indented-code">
+func main():
+    x := 0
+    Sys::println(x)
+    func f2():
+        x := 1
+    Sys::println(x)
+    f2()
+    Sys::println(x)
+</pre>
+
+In order to assign to a variable in an outer block, the <code>nonlocal</code> statement at the beginning of a function punches a hole up to an appropriate layer. The following program will thus print <code>0</code> then <code>0</code> then <code>1</code>.
+
+<pre class="indented-code">
+func main():
+    x := 0
+    Sys::println(x)
+    func f2():
+        nonlocal x
+        x := 1
+    Sys::println(x)
+    f2()
+    Sys::println(x)
+</pre>
+
+Note that class elements are deliberately excluded from the standard scoping mechanism so that the following is invalid:
+
+<pre class="indented-code">
+class Dog:
+    type := "Dog"
+
+    func get_type():
+        return type
+</pre>
+
+Class elements <em>must</em> be referenced via the <code>self</code> variable:
+
+<pre class="indented-code">
+class Dog:
+    type := "Dog"
+
+    func get_type():
+        return self.type
+</pre>
+
+
+<hr>
+
+
+<h2>Objects and Classes</h2>
 
 
 <h3>Objects</h3>
@@ -190,98 +297,6 @@ If more than one superclass is specified, then any naming conflicts between two 
 <h3>Types</h3>
 
 As well as specifying a reusable unit of code, classes also specify types that can be used to classify objects. Classes provide two important functions which can check whether a given object has a relationship to it. <code>C.instantiated(o)</code> succeeds if <code>o</code> was created by <code>C</code>'s <code>new</code> function. <code>C.conformed_by(o)</code> succeeds if <code>o</code> has a matching slot for every slot defined in <code>C</code> (note that <code>o</code> may have been created by a different class but still conform to <code>C</code>).
-
-
-<h3>Function arguments</h3>
-
-Functions can accept zero or more arguments in the standard way. The general form of a function is thus:
-
-<p><code class="indented-code">
-func m(a<sub>i</sub>, ..., a<sub>n</sub>, a<sub>j</sub> := &lt;<em>default value</em>&gt<sub>j</sub>;, ... a<sub>m</sub> := &lt;<em>default value</em>&gt<sub>m</sub>, *v)
-</code>
-
-<p>where <em>i</em>, <em>j</em> &gt;= 0 and <code>v</code> is optional. Put another way, this means that (optionally) normal arguments are (optionally) followed by arguments with default values and (optionally) completed by a final 'var args' variable.
-
-<p>The caller of a function must specify values for all normal arguments. Arguments with default values for which no value is specified by the caller will have their default value evaluated and assigned to that arg. All remaining arguments are put into a list and assigned to <code>v</code>.
-
-<p>For example a <code>printf</code> like function would be specified as follows:
-
-<pre class="indented-code">
-func printf(format, *var_args):
-    ...
-</pre>
-
-An <code>fprintf</code> style function which defaults to using standard out might look as follows:
-
-<pre class="indented-code">
-func fprintf(format, stream := Sys::stdout, *var_args):
-    ...
-</pre>
-
-Default values are evaluated each time a value is not passed to a particular argument. This is substantially different than the mechanism found in Python. Note that Converge has no concept of function overloading based on e.g. function arity.
-
-
-<h3>Lexical scoping</h3>
-
-Converge is lexically scoped. The following program will thus print <code>0</code> then <code>1</code> then <code>1</code>.
-
-<pre class="indented-code">
-func main():
-    x := 0
-    Sys::println(x)
-    func f2():
-        Sys::println(x)
-    x := 1
-    f2()
-    Sys::println(x)
-</pre>
-
-Assignment of a variable in a block causes that variable to be made local to the block. The following program will thus print <code>0</code> then <code>0</code> then <code>0</code>.
-
-<pre class="indented-code">
-func main():
-    x := 0
-    Sys::println(x)
-    func f2():
-        x := 1
-    Sys::println(x)
-    f2()
-    Sys::println(x)
-</pre>
-
-In order to assign to a variable in an outer block, the <code>nonlocal</code> statement at the beginning of a function punches a hole up to an appropriate layer. The following program will thus print <code>0</code> then <code>0</code> then <code>1</code>.
-
-<pre class="indented-code">
-func main():
-    x := 0
-    Sys::println(x)
-    func f2():
-        nonlocal x
-        x := 1
-    Sys::println(x)
-    f2()
-    Sys::println(x)
-</pre>
-
-Note that class elements are deliberately excluded from the standard scoping mechanism so that the following is invalid:
-
-<pre class="indented-code">
-class Dog(Animal):
-    type := "Dog"
-
-    func get_type():
-        return type
-</pre>
-
-Class elements <em>must</em> be referenced via the <code>self</code> variable:
-
-<pre class="indented-code">
-class Dog(Animal):
-    type := "Dog"
-
-    func get_type():
-        return self.type
-</pre>
 
 
 <hr>
@@ -557,6 +572,13 @@ Alternation is a special kind of generator which successively generates each of 
 for i := 1 | 2:
     Sys::println(i)
 </pre>
+
+
+<h3>Binary operators</h3>
+
+Comparisons (equality, greater than etc.) and other binary operators (add, divide etc.) are defined by functions within objects. The functions names' are the same as the standard infix operators <code>==</code>, <code>+</code> etc. The infix operators are simply syntactic sugar for calling these functions, and thus one can redefine their meaning by providing different definitions of the infix functions within objects.
+
+<p>The <code>is</code> operator is a unique comparison infix operation. It tests two objects for identity equality, and it can not be redefined by the objects themselves.
 
 
 <h3>Precedence</h3>
