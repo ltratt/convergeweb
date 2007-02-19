@@ -164,15 +164,6 @@ func fprintf(format, stream := Sys::stdout, *var_args):
 Default values are evaluated each time a value is not passed to a particular argument. This is substantially different than the mechanism found in Python. Note that Converge has no concept of function overloading based on e.g. function arity.
 
 
-<h3>Functions as <q>lambdas</q></h3>
-
-Converge does not provide any special type of a function for <q>small functions</q> such as a specialised lambda form. However sometimes the indentation syntax of Converge can be inconvenient when passing functions containing only a few expressions as arguments to another function. In such cases one can use the alternative curly bracket syntax as follows:
-
-<pre class="indented-code">
-Functional::map(func (x) { return x.to_str() }, list)
-</pre>
-
-
 <h3>Lexical scoping</h3>
 
 Converge is lexically scoped. The following program will thus print <code>0</code> then <code>1</code> then <code>1</code>.
@@ -233,6 +224,15 @@ class Dog:
 
     func get_type():
         return self.type
+</pre>
+
+
+<h3>Functions as <q>lambdas</q></h3>
+
+Converge does not provide any special type of a function for <q>small functions</q> such as a specialised lambda form. However sometimes the indentation syntax of Converge can be inconvenient when passing functions containing only a few expressions as arguments to another function. In such cases one can use the alternative curly bracket syntax as follows:
+
+<pre class="indented-code">
+Functional::map(func (x) { return x.to_str() }, list)
 </pre>
 
 
@@ -735,7 +735,7 @@ Sets the value of the slot <code>name</code> to <code>value</code>.
 
 <h3>Classes and metaclasses</h3>
 
-All classes are instances of <code>Class</code> or one of its subclasses. Thus the classes we have seen earlier in this document have elided the <code>metaclass</code> which defaults to <code>Class</code> 
+All classes are instances of <code>Class</code> or one of its subclasses. Thus the classes we have seen earlier in this document have elided the <code>metaclass</code> which defaults to <code>Class</code>:
 
 <pre class="indented-code">
 class Animal metaclass Class:
