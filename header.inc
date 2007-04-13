@@ -35,6 +35,7 @@
 <a href="/about.html">About</a><br>
 <a href="/documentation/">Documentation</a><br>
 <a href="/download.html">Download</a><br>
+<a href="/links.html">Links</a><br>
 <a href="/lists/">Mailing lists</a><br>
 </td>
 <td id="v"></td>
