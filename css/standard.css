@@ -78,7 +78,8 @@ A:hover {
 #main H1, H2, H3, H4, H5, H6 {
 	font-family: sans-serif;
 	padding-left: 20px;
-	margin-bottom: 7px
+	margin-bottom: 7px;
+	text-align: left;
 	}
 
 
