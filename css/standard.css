@@ -19,6 +19,10 @@ A:hover {
 	color: #e00004
 	}
 
+Pre {
+	padding-left: 10px
+}
+
 #header-top {
 	background-color: #DAEBFF;
 	padding: 10px 0 10px
