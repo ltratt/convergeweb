@@ -212,17 +212,17 @@ Note that class elements are deliberately excluded from the standard scoping mec
 class Dog:
     type := "Dog"
 
-    func get_type():
+    func get_type(self):
         return type
 </pre>
 
-Class elements <em>must</em> be referenced via the <code>self</code> variable:
+As the above suggests, the first parameter of a bound function will always be set to the <q>self</q> object. Conventionally this parameter is always called <code>self</code>. Via this variable the current objects slots can be accessed:
 
 <pre class="indented-code">
 class Dog:
     type := "Dog"
 
-    func get_type():
+    func get_type(self):
         return self.type
 </pre>
 
@@ -255,13 +255,13 @@ While the conceptually simple prototype based view of the world has many advanta
 
 <pre class="indented-code">
 class Animal:
-    func init(name):
+    func init(self, name):
         self.name := name
 
-    func get_name():
+    func get_name(self):
         return self.name
 
-    func set_name(name):
+    func set_name(self, name):
         self.name := name
 </pre>
 
@@ -746,7 +746,7 @@ New metaclasses can be defined and used thus:
 
 <pre class="indented-code">
 class Singleton(Class):
-    func new():
+    func new(self):
         if not self.find_slot("instance"):
             self.instance := exbi Class.new()
         return self.instance
