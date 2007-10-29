@@ -529,8 +529,8 @@ func range(m, n):
     while m < n:
         yield m
         m += 1
-	
-	return fail
+    
+    return fail
 </pre>
 
 
@@ -545,7 +545,7 @@ if i < j & i > 100:
     ...
 </pre>
 
-<p>Similarly the following succeeds if either the first comparison true or, if it is not, the second comparison succeeds (note that this evaluation is, as expected, lazy so that if the first comparison succeeds the second is not evaluated):
+<p>Similarly the following succeeds if either the first comparison succeeds, if it is not, the second comparison succeeds (note that this evaluation is, as expected, lazy so that if the first comparison succeeds the second is not evaluated):
 
 <pre class="indented-code">
 if i < j | i > 100:
@@ -576,14 +576,9 @@ for i := 1 | 2:
 
 <h3>Binary operators</h3>
 
-Comparisons (equality, greater than etc.) and other binary operators (add, divide etc.) are defined by functions within objects. The functions names' are the same as the standard infix operators <code>==</code>, <code>+</code> etc. The infix operators are simply syntactic sugar for calling these functions, and thus one can redefine their meaning by providing different definitions of the infix functions within objects.
+Comparisons (equality, greater than etc.) and other binary operators (add, divide etc.) are defined by functions within objects. The functions' names are the same as the standard infix operators <code>==</code>, <code>+</code> etc. The infix operators are simply syntactic sugar for calling these functions, and thus one can redefine their meaning by providing different definitions of the infix functions within objects.
 
 <p>The <code>is</code> operator is a unique comparison infix operation. It tests two objects for identity equality, and it can not be redefined by the objects themselves.
-
-
-<h3>Precedence</h3>
-
-Converge strives, whenever it would not conflict with standard conventions, to ensure left-to-right evaluation. For example, mathematical expressions use the standard precedence rules inherited from mathematics.
 
 
 <hr>
