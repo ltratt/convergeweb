@@ -518,7 +518,7 @@ Expressions in Converge can sometimes generate multiple values. In such a case, 
 
 <pre class="indented-code">
 l := [1, 3, 5, 8]
-for e := l.iterate():
+for e := l.iter():
     Sys::println(e)
 </pre>
 
@@ -559,10 +559,10 @@ The conjunction and alternation operators are in fact part of the general machin
 
 <pre class="indented-code">
 l := [1, 3, 5, 8]
-f := (x := l.iterate() & x % 2 == 0 & x)
+f := (x := l.iter() & x % 2 == 0 & x)
 </pre>
 
-The <code>iterate</code> function of a list generates all the elements of a list in order. The first value it generates in the above example is <code>1</code> which is assigned to <code>x</code>. The ampersand <code>&amp;</code> operator <em>conjunction</em> is similar to 'and' - it means that all parts of the conjunction must succeed in order for the conjunction to succeed. If the conjunction succeeds, the value of the last part of the conjunction is returned. So the next step in the computation is to test <code>1 % 2 == 0</code> which fails. This causes control to backtrack to the last generator - the <code>iterate</code> generator, which produces another value and assigns it to <code>x</code>. This sequence repeats until eventually <code>8</code> is assigned to <code>x</code>. Since <code>8 % 2 == 0</code>, the conjunction can attempt to move to its next part, which is simply <code>x</code> which succeeds and causes <code>8</code> to be the result of the conjunction. <code>8</code> is thus assigned to <code>f</code>. This style of evaluation is known as <em>goal-directed evaluation</em>.
+The <code>iter</code> function of a list generates all the elements of a list in order. The first value it generates in the above example is <code>1</code> which is assigned to <code>x</code>. The ampersand <code>&amp;</code> operator <em>conjunction</em> is similar to 'and' - it means that all parts of the conjunction must succeed in order for the conjunction to succeed. If the conjunction succeeds, the value of the last part of the conjunction is returned. So the next step in the computation is to test <code>1 % 2 == 0</code> which fails. This causes control to backtrack to the last generator - the <code>iter</code> generator, which produces another value and assigns it to <code>x</code>. This sequence repeats until eventually <code>8</code> is assigned to <code>x</code>. Since <code>8 % 2 == 0</code>, the conjunction can attempt to move to its next part, which is simply <code>x</code> which succeeds and causes <code>8</code> to be the result of the conjunction. <code>8</code> is thus assigned to <code>f</code>. This style of evaluation is known as <em>goal-directed evaluation</em>.
 
 <p>It is important to note that control does not back up to arbitrary levels; in fact, backtracking is limited to <em>bound</em> expressions. For example, the condition of an <code>if</code> statement is a bound expression, so the failure of the condition does not cause control to escape back beyond the <code>if</code> statement. Significantly, each separate line in a source file is automatically a bound expression, so if the expression on one line fails, control does not backtrack to previous lines.
 
@@ -654,11 +654,11 @@ Note that <code>while</code> differs from <code>for</code> in that <code><em>exp
 
 <pre class="indented-code">
 l := [1, 2, 3, 4]
-while i := l.iterate():
+while i := l.iter():
     Sys::println(i)
 </pre>
 
-since the <code>iterate</code> generator will be recreated anew on each loop which is probably not what was intended.
+since the <code>iter</code> generator will be recreated anew on each loop which is probably not what was intended.
 
 
 <h3><code>break</code> and <code>continue</code></h3>

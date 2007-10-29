@@ -250,7 +250,7 @@ func simple_printf(format):
 
   params := []
   i := 0
-  for part := split.iterate():
+  for part := split.iter():
     if part == PRINTF_INT | part == PRINTF_STRING:
       params.append(CEI::iparam(CEI::ivar("p" + i.to_str()), null))
       i += 1
