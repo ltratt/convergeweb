@@ -458,8 +458,10 @@ func range(m, n):
         yield m
         m += 1
     
-    return fail
+    fail
 </pre>
+
+The <code>fail</code> statement causes the function to both return and to transmit failure to its caller.
 
 
 <h3>Boolean <q>and</q> and <q>or</q></h3>
@@ -530,8 +532,6 @@ else:
 
 Zero or more <code>elif</code> blocks can be specified. A maximum of one <code>else</code> block can be specified.
 
-<p>If <em>condition</em> evaluates to <code>fail</code>, the condition itself itself is considered to fail. Note that this is substantially different than Icon's semantics.
-
 
 <h3>The <code>ndif</code> control structure</h3>
 
@@ -544,8 +544,6 @@ elif <em>&lt;condition&gt;</em> then:
 </pre>
 
 Zero or more <code>elif</code> blocks can be specified.
-
-<p>If <em>condition</em> evaluates to <code>fail</code>, the condition itself itself is considered to fail. Note that this is substantially different than Icon's semantics.
 
 <p><code>ndif</code> is the <q>no default if</q> structure; in other words, a run-time exception is raised if none of the clauses' conditions succeeds. Since the <q>default</q> action is therefore to raise an exception, <code>ndif</code> statements can not contain an <code>else</code> clause.
 
