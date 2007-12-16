@@ -77,13 +77,20 @@ $
 
 <h3>Traditional compilation</h3>
 
-<code>convergec</code> produces <code>.cvb</code> files from <code>.cv</code> source files. Each <code>.cvb</code> file represents a single module. <code>convergec</code> accepts the following command-line parameters:
+<code>convergec</code> produces <code>.cvb</code> files from <code>.cv</code> source files or packages. Each <code>.cvb</code> file represents a single module or package. <code>convergec</code> accepts the following command-line parameters:
 
 <pre class="indented-code">
 convergec [-I &lt;directory&gt;] -o &lt;output&gt; &lt;input&gt;
 </pre>
 
 The <code>-I</code> switch specifies a directory to be included in the import path. Multiple <code>-I</code> switches can be specified; the directories listed will be searched in the order they are defined.
+
+<p>Indicative executions of <code>convergec</code> to compile a module and package respectively are as follows:
+
+<pre class="indented-code">
+$ convergec -o M.cvb M.cv
+$ convergec -o P.cvb P
+</pre>
 
 
 <h3>Auto-make front end</h3>
