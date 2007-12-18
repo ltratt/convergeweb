@@ -38,7 +38,15 @@ $
 
 Converge's auto-make facility ensures that all files in a project are upto date; its chief limitation is that it sometimes has to compile individual files multiple times to ensure that this is the case, even when a user may know that this is not strictly necessary.
 
-<p>As auto-make runs, it attempts to write cached bytecode files to the local disk. These can on occasion be the cause of <q>strange</q> compilation problems (perhaps after moving files from one machine to another, or time shifts on your local machine). In such cases, converge can be instructed via the <code>-f</code> switch to ignore all cached bytecode files and perform compilation from scratch, updating all cached bytecode files. This is the equivalent of running <code>make clean && make</code> for projects built using <code>make</code>.
+<p>As auto-make runs, it attempts to write cached bytecode files to the local disk. These can on occasion be the cause of <q>strange</q> compilation problems (perhaps after moving files from one machine to another, or time shifts on your local machine). In such cases, converge can be instructed via the <code>-f</code> switch to ignore all cached bytecode files and perform compilation from scratch, updating all cached bytecode files. This is the equivalent of running <code>make clean && make</code> for projects built using <code>make</code>. Using the <code>-f</code> switch in the running example will always involve output along the lines of the following:
+<pre class="indented-code">
+$ converge -f -v hello.cv
+===> Compiling /tmp/hello.cv...
+===> Finished compiling /tmp/hello.cv.
+===> Linking.
+Hello world!
+$
+</pre>
 
 
 <hr>
