@@ -57,6 +57,8 @@ $
 
 Converge's auto-make facility ensures that all files in a project are upto date; its chief limitation is that it sometimes has to compile individual files multiple times to ensure that this is the case, even when a user may know that this is not strictly necessary. In such cases, it may be more efficient to use the <a href="../tools/">individual compiler tools</a>.
 
+<p>If you encounter <q>strange</q> compilation problems (perhaps after moving files from one machine to another), converge can be instructed via the <code>-f</code> switch to ignore all your cached bytecode files and perform compilation from scratch, updating all cached bytecode files. Although this is rarely needed, it can be useful on occasion.
+
 <hr>
 
 
