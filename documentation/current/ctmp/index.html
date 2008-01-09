@@ -226,9 +226,7 @@ The <code>rename</code> declaration is typically only used in quasi-quoted code.
 
 <h2>The <code>CEI</code> interface</h2>
 
-At various points when compile-time meta-programming, one needs to interact with the compiler. The Converge compiler is entirely contained within a package called <code>Compiler</code> which is available to every Converge program. The <code>CEI</code> module within the <code>Compiler</code> package is the officially sanctioned interface to the Compiler, and can be imported with <code>import Compiler::CEI</code>. Accessing the compiler internals in any other way may lead to future incompatibilities or undefined behaviour.
-
-<p>The <a href="/documentation/current/modules_html/Compiler.CEI.html">complete CEI module documentation can is available online</a>.
+At various points when compile-time meta-programming, one needs to interact with the compiler. The <code>CEI</code> package is the officially sanctioned interface to the Compiler, and can be imported with <code>import CEI</code>. Accessing the compiler internals in any other way may lead to future incompatibilities or undefined behaviour. The <a href="/documentation/current/modules_html/CEI.html">complete CEI module documentation can is available online</a>.
 
 
 <h3>When quasi-quotes are not enough</h3>
