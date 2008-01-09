@@ -208,6 +208,20 @@ func $$splice$$():
 There are thus no unresolvable forward references in this example. Notice that Converge's approach to the forward reference problem is not a completely general solution since some forward references (particularly those to definitions beyond a splice site) are inherently unresolvable. Converge's approach is intended to significantly reduce the problem to the point that any unresolvable references are the result of programmer error.
 
 
+<h4>Variable renaming</h4>
+
+When generating code, it is often the case that references to variables outside generated are made. In certain situations, intentional dynamic scoping can interfere with this. Converge thus allows variables to be declared as being renamed in a scope. When a variable is renamed, the previous name is removed from the scope, and the renamed name is implicitly nonlocal to the scope. For example in the following code, calling <code>f</code> will result in the outer <code>x</code> being incremented by 2; the <code>x</code> defined in <code>f</code> is local to <code>f</code> itself.
+<pre>
+x := 2
+
+func f():
+  rename x as y
+  x := 3
+  y += 2
+</pre>
+The <code>rename</code> declaration is typically only used in quasi-quoted code. Note that the <code>rename</code> and <code>nonlocal</code> declarations must be declared before any expressions in a function body.
+
+
 <hr>
 
 <h2>The <code>CEI</code> interface</h2>
