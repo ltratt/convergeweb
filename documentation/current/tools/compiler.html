@@ -90,10 +90,10 @@ $
 <code>convergec</code> produces <code>.cvb</code> files from <code>.cv</code> source files or packages. Each <code>.cvb</code> file represents a single module or package. <code>convergec</code> accepts the following command-line parameters:
 
 <pre class="indented-code">
-convergec [-I &lt;directory&gt;] -o &lt;output&gt; &lt;input&gt;
+convergec [-I &lt;directory&gt | library;] -o &lt;output&gt; &lt;input&gt;
 </pre>
 
-The <code>-I</code> switch specifies a directory to be included in the import path. Multiple <code>-I</code> switches can be specified; the directories listed will be searched in the order they are defined.
+The <code>-I</code> switch specifies a directory or library (<code>.cvl</code> file) to be included in the import path. Multiple <code>-I</code> switches can be specified; the includes will be searched in the order they are defined on the command line.
 
 <p>Indicative executions of <code>convergec</code> to compile a module and package respectively are as follows:
 
@@ -160,10 +160,10 @@ If the underlying platform supports it, then the Converge executable is marked a
 
 <h3>Creating a Converge library</h3>
 
-<p><code>convergel</code> can combine one or more <code>.cvb</code> files into a <code>.cvl</code> library. This is a simple convenience to prevent large quantities of <code>.cvb</code> files cluttering up a file system.
+<p><code>convergel</code> can <q>bundle</q> a package into a single <code>.cvl</code> library. This makes distributing pre-compiled binaries trivial (and marginally speeds up compilation, which no longer needs to continually trek through directories looking for matching files). The <code>-l</code> switch tells <code>convergel</code> to create a library. In similar fashion to normal linking, the first input file must be the top level package the library represents; all of its sub-modules and sub-packages must then be specified on the command line.
 
 <pre class="indented-code">
-convergel -l -o &lt;output.cvl&gt; &lt;input&gt; [... &lt;input&gt;]
+convergel -l -o &lt;output.cvl&gt; &lt;top_level_pkg.cvb&gt; [... &lt;file.cvb&gt;]
 </pre>
 
 <!--#include virtual="/footer.inc" -->
