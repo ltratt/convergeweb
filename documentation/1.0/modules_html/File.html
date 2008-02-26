@@ -1,0 +1,109 @@
+<html>
+<head><title>File</title>
+<body>
+<p align="right"><a href="modsindex.html">Modules index</a>
+<hr>
+<h1 align="center">File</h1>
+
+<h3>File objects</h3>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="File"><code>class File</code></a>:<br>
+
+File objects are created by calling the following function on the <code>File</code> class object:
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="File$$new"><code>func new(path, mode):</code></a>
+
+Opens the file at <code>path</code> for reading or writing. <code>mode</code> can take the following values:
+<table>
+<tr><td><code>r</code></td><td>Open for reading.</td></tr>
+<tr><td><code>r+</code></td><td>Open for reading and writing.</td></tr>
+<tr><td><code>w</code></td><td>Open for writing; truncates file if it already exists, or creates a new file if none currently exists.</td></tr>
+<tr><td><code>w+</code></td><td>Open for reading and writing; truncates file if it already exists, or creates a new file if none currently exists.</td></tr>
+<tr><td><code>a</code></td><td>Open for writing; does not truncate file if it already exists, but does create a new file if none currently exists.</td></tr>
+<tr><td><code>a+</code></td><td>Open for reading and writing; does not truncate file if it already exists, but does create a new file if none currently exists.</td></tr>
+</table>
+</div>
+
+File objects support the following functions:
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="File$close"><code>func close():</code></a>
+
+Closes the file. Note that although the file will be closed when the file object is garbage collected, it is often good manners (and the release of a burden on the OS) to close files once they are finished with.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="File$read"><code>func read(size := null):</code></a>
+
+Reads <code>size</code> bytes from the file. If <code>size</code> is <code>null</code>, the full contents of the file are returned.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="File$readln"><code>func readln():</code></a>
+
+Successively generates each line of text in the file.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="File$write"><code>func write(s):</code></a>
+
+Writes <code>s</code> to the file.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="File$writeln"><code>func writeln(s):</code></a>
+
+Writes <code>s</code> to the file plus the platform appropriate newline character(s).
+</div>
+</div>
+
+
+<h3>File name manipulation</h3>
+
+These functions should be used to ensure that file name manipulation is done in a platform independent manner:
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="canon_path"><code>func canon_path(path):</code></a>
+
+Returns the fully canonicalized version of <code>path</code>. The exact effects are platform dependent.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="exists"><code>func exists(path):</code></a>
+
+Succeeds if <code>path</code> exists.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="is_dir"><code>func is_dir(path):</code></a>
+
+Succeeds if <code>path</code> is a directory. Notice that mere failure - as opposed to an exception being generated - does not necessarily imply that <code>path</code> exists but is not a directory [this behaviour is platform dependent].
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iter_dir_entries"><code>func iter_dir_entries(dir_path):</code></a>
+
+Successively generates each leaf names in the directory <code>dir_path</code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="join_names"><code>func join_names(*names):</code></a>
+
+Concatenates the entries of <code>names</code> into a path. This thus reverses the effects of <code>split_names</code> or <code>split_leaf</code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="join_ext"><code>func join_ext(path, ext):</code></a>
+
+Joins filename extension <code>ext</code> to the path <code>path</code>. If <code>ext</code> is empty, <code>path</code> is returned. This reverses the effect of <code>split_ext</code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="split_ext"><code>func split_ext(path):</code></a>
+
+Returns a list of length two <code>[<em>&lt;path&apos;s directory plus leaf name&gt;</em>, <em>&lt;path&apos;s file extension&gt;</em>]</code>. The file name extension separator is not present in either component. e.g. <code>split_ext(&quot;/a/b/c.d&quot;)</code> returns <code>[&quot;/a/b/c&quot;, &quot;d&quot;]</code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="split_leaf"><code>func split_leaf(path):</code></a>
+
+Returns a list of length two <code>[<em>&lt;path&apos;s directory&gt;</em>, <em>&lt;path&apos;s leaf name&gt;</em>]</code>. The file name extension separator is not present in either component. e.g. <code>split_leaf(&quot;/a/b/c.d&quot;)</code> returns <code>[&quot;/a/b&quot;, &quot;c.d&quot;]</code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="split_names"><code>func split_names(path):</code></a>
+
+Returns a list representing all the directories and the leaf name of <code>path</code>. The separator between the directories and leaf name is not present in the output. e.g. <code>split_names(&quot;/a/b/c.d&quot;)</code> returns <code>[&quot;a&quot;, &quot;b&quot;, &quot;c.d&quot;]</code>.
+</div>
+
+
+<hr>
+<p align="right">cvd_to_html &copy;2006-2007 <A HRef = "http://tratt.net/laurie/">Laurence Tratt</A></p>
+</body>
+</html>

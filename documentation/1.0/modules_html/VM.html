@@ -1,0 +1,23 @@
+<html>
+<head><title>VM</title>
+<body>
+<p align="right"><a href="modsindex.html">Modules index</a>
+<hr>
+<h1 align="center">VM</h1>
+
+Important functions and classes in this module are as follows:
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="add_modules"><code>func add_modules(mods):</code></a>
+
+Adds or replaces modules in the running VM. <code>mods</code> should be a list of modules. Note that this function does not import modules: it merely adds them into the VM so that they can then be imported e.g. by <code><a href="#import_module">import_module</a></code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="import_module"><code>func import_module(mod_id):</code></a>
+
+Imports the module with identifier <code>mod_id</code>. Raises an exception if no such module is in the VM.
+</div>
+
+<hr>
+<p align="right">cvd_to_html &copy;2006-2007 <A HRef = "http://tratt.net/laurie/">Laurence Tratt</A></p>
+</body>
+</html>
