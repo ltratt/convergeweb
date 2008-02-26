@@ -1,5 +1,129 @@
 <!--#include virtual="/header.inc" -->
 
-Converge traces its heritage back to languages as diverse as Python and Haskell, Icon and Smalltalk, and so on. It is intended to be an utterly practical, modern programming language, mixing proven elements from different sources into one coherent whole. Both language and libraries aim for clean design with a firm emphasis on pragmatics. Common idioms are easily expressed, while still allowing complex concepts to be expressed neatly.
+<h2>Background</h2>
+
+Converge traces its heritage back to languages as diverse as Python, Haskell, Icon and Smalltalk. It is intended to be an utterly practical, modern programming language, mixing proven elements from different sources into one coherent whole. Both language and libraries aim for clean design with a firm emphasis on pragmatics. Common idioms are easily expressed, while still allowing complex concepts to be expressed neatly. Importantly, Converge does not aim to be merely a minor re-configuration of features from well-known languages: it aims to innovate, and to give to the programmer a new way of looking at programming. If you're frustrated by your current language of choice, Converge might be for you.
+
+
+<h2>Hello world!</h2>
+
+Converge has a Python-esque indentation syntax. The minimal <q>hello world!</q> program in Converge looks as follows:
+
+<pre>
+import Sys
+
+func main():
+  Sys::println("Hello world!")
+</pre>
+
+
+<h2>Generating code with compile-time meta-programming</h2>
+
+Converge implements a full Compile-Time Meta-Programming (CTMP) facility. At a simple level, this can be seen as a macro-like facility, although it is more powerful than most existing macro facilities as arbitrary code can be run at compile-time. Using this, one can interact with the compiler, and generate code safely and easily as ITrees (a.k.a. abstract syntax trees).
+
+<p>As a simple example, one can pre-compute the 30th entry in the Fibonacci sequence (computationally, a fairly expensive operation):
+<pre>
+func fib(n):
+  if n == 0:
+    return 0
+  elif n == 1:
+    return 1
+  else:
+    return fib(n - 1) + fib(n - 2)
+
+fib30 := $&lt;CEI::lift(fib(30))&gt;
+</pre>
+When this program is compiled, the <em>splice</em> <code>$&lt;...&gt;</code> is evaluated at compile-time. This particular splice calculates the 30th entry in the Fibonacci sequence, <em>lifts</em> the result into an ITree (an AST of an integer) and assigns it to <code>fib30</code>. When the resulting binary is run, the required Fibonacci number can be referenced rather than calculated.
+
+<p>How about caching the first <em>n</em> entries of the Fibonacci sequence? It's easily done:
+<pre>
+func fibs_upto(n):
+  fibs := []
+  i := 0
+  while i < n:
+    fibs.append(fib(i))
+    i += 1
+  return CEI::lift(fibs)
+
+cfibs := $&lt;fibs_upto(30)&gt;
+</pre>
+This makes the resulting binary run approximately 400 times faster.
+
+
+<h2>Domain specific language implementation</h2>
+
+There's only so much pre-caching of results one can do. Converge allows Domain Specific Languages (DSLs) of arbitrary syntaxes to be embedded into it. Wouldn't it be fun to see how the <code>fib</code> function would look in an idealised assembly language that abstracts away from the specifics of a real-world processor? Normally this would involve flex, yacc, head scratching, and an implementation so fragile that it only works under a full moon. In Converge, a simple layer atop CTMP means that a 10Kb DSL implementation makes it easy to define our own personal assembly language. With this we can then define an interactive version of <code>fib</code> which asks the user for a number in the Fibonacci sequence and prints it out:
+<pre>
+import WSI_Asm
+
+func main():
+  test := $<<WSI_Asm::ab>>:
+    SWI inputi
+    CALL fib
+    SWI printi
+    SWI exit
+
+    //
+    // fib(n) reads in an int on R0 and outputs an int on R0.
+    //
+
+    fib:
+    // This routine corrupts R1 and R2, so push them onto the stack.
+    PUSH R1
+    PUSH R2
+    IF R0 == 0 JMP fib0 // fib(0) == 0
+    IF R0 == 1 JMP fib1 // fib(1) == 1
+    // fib(n) where n > 1
+    R1 := R0
+    R0 := R1 - 1
+    CALL fib
+    R2 := R0
+    R0 := R1 - 2
+    CALL fib
+    R0 := R2 + R0
+    JMP fib_finish
+    fib0: // fib(0) == 0
+    R0 := 0
+    JMP fib_finish
+    fib1: // fib(1) == 1
+    R0 := 1
+    fib_finish:
+    POP R2
+    POP R1
+    RTN
+
+  test.new().exec()
+</pre>
+You can see the full source code for this example in the Converge distribution. As you can imagine, the only limit to the DSLs you can embed is your imagination. There's no requirement that DSLs be related to computing technology as in the above example - DSLs already implemented in Converge have ranged from insurance DSLs to web DSLs. Converge gives you unparalleled help in all the so-called <q>trivial</q> - but actually vitally important - issues such as parsing and error-checking.
+
+
+<h2>Expression evaluation</h2>
+
+Converge's expression evaluation system initially appears to be identical to standard languages. Scratch a bit deeper and you'll see that something slightly different is going on. In Converge virtually everything is an expression. Unlike most languages, expressions either <em>succeed</em> - in which case they also return a value - or they <em>fail</em> - in which case no value is produced. Building upon this concept, Converge has full generators - functions which can generate multiple values and which can be involved in a limited form of backtracking. Generators allow one to naturally redefine the <code>fib</code> function to be a generator producing all Fibonacci numbers from 0 to n:
+<pre>
+func fib(n):
+  i := 0
+  j := 1
+  while n > 0:
+    j_old := j
+    j := i + j
+    i := j_old
+    yield i
+    n -= 1
+  fail
+
+func fibs_upto(n):
+  fibs := []
+  for fibs.append(fib(n))
+  return CEI::lift(fibs)
+
+cfibs := $&lt;fibs_upto(30)&gt;
+</pre>
+Appropriate use of Converge's expression evaluation semantics can lead to unusually elegant code.
+
+
+<h2>Want to find out more?</h2>
+
+There's a lot more to find out about Converge. If your appetite's been whetted, the <a href="documentation">documentation</a> contains much more information, including a more gentle introduction, and of course you can see example code when you <a href="releases/">download</a> Converge.
 
 <!--#include virtual="/footer.inc" -->

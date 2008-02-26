@@ -2,3 +2,4 @@ RewriteEngine on
 RewriteBase /
 RewriteRule lists.html /lists/ [R=permanent]
 RewriteRule cgi-bin/darcsweb.cgi /cgi-bin/gitweb.cgi? [R=permanent,L]
+RewriteRule download.html /releases/ [R=permanent]

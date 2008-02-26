@@ -365,9 +365,7 @@ Converge integers are immutable.
 
 <h2>Expressions</h2>
 
-As has been seen earlier in the document, simple statements work in Converge much as one would expect. This section mostly documents deviations from the expected norm.
-
-<p>At its core, Converge is an expression based language based on Icon. Much of what is written about Icon is relevant to Converge. e.g. <a href="http://www.cs.arizona.edu/icon/docs/ipd266.htm">Ralph Griswold's introduction to Icon</a> is a very useful introduction.
+At its core, Converge is an expression based language based on Icon. As has been seen earlier in the document, simple statements work in Converge much as one would expect. This section mostly documents deviations from the expected norm.
 
 
 <h3>Assignment</h3>
@@ -485,16 +483,7 @@ if i < j | i > 100:
 
 <h3>Conjunction and alternation</h3>
 
-The conjunction and alternation operators are in fact part of the general machinery surrounding generators. Conjunction can be used to control backtracking. The following fragment will assign the first number wholly divisible by <code>2</code> to <code>f</code>:
-
-<pre class="indented-code">
-l := [1, 3, 5, 8]
-f := (x := l.iter() & x % 2 == 0 & x)
-</pre>
-
-The <code>iter</code> function of a list generates all the elements of a list in order. The first value it generates in the above example is <code>1</code> which is assigned to <code>x</code>. The ampersand <code>&amp;</code> operator <em>conjunction</em> is similar to 'and' - it means that all parts of the conjunction must succeed in order for the conjunction to succeed. If the conjunction succeeds, the value of the last part of the conjunction is returned. So the next step in the computation is to test <code>1 % 2 == 0</code> which fails. This causes control to backtrack to the last generator - the <code>iter</code> generator, which produces another value and assigns it to <code>x</code>. This sequence repeats until eventually <code>8</code> is assigned to <code>x</code>. Since <code>8 % 2 == 0</code>, the conjunction can attempt to move to its next part, which is simply <code>x</code> which succeeds and causes <code>8</code> to be the result of the conjunction. <code>8</code> is thus assigned to <code>f</code>. This style of evaluation is known as <em>goal-directed evaluation</em>.
-
-<p>It is important to note that control does not back up to arbitrary levels; in fact, backtracking is limited to <em>bound</em> expressions. For example, the condition of an <code>if</code> statement is a bound expression, so the failure of the condition does not cause control to escape back beyond the <code>if</code> statement. Significantly, each separate line in a source file is automatically a bound expression, so if the expression on one line fails, control does not backtrack to previous lines.
+The conjunction and alternation operators are in fact part of the general machinery surrounding generators and can be used to control backtracking. It is important to note that control does not back up to arbitrary levels; in fact, backtracking is limited to <em>bound</em> expressions. For example, the condition of an <code>if</code> statement is a bound expression, so the failure of the condition does not cause control to escape back beyond the <code>if</code> statement. Significantly, each separate line in a source file is automatically a bound expression, so if the expression on one line fails, control does not backtrack to previous lines.
 
 Alternation is a special kind of generator which successively generates each of its values. For example, the following prints <code>1</code> then <code>2</code>:
 
@@ -506,9 +495,7 @@ for i := 1 | 2:
 
 <h3>Binary operators</h3>
 
-Comparisons (equality, greater than etc.) and other binary operators (add, divide etc.) are defined by functions within objects. The functions' names are the same as the standard infix operators <code>==</code>, <code>+</code> etc. The infix operators are simply syntactic sugar for calling these functions, and thus one can redefine their meaning by providing different definitions of the infix functions within objects.
-
-<p>The <code>is</code> operator is a unique comparison infix operation. It tests two objects for identity equality, and it can not be redefined by the objects themselves.
+Comparisons (equality, greater than etc.) and other binary operators (add, divide etc.) are defined by functions within objects. The functions' names are the same as the standard infix operators <code>==</code>, <code>+</code> etc. The infix operators are simply syntactic sugar for calling these functions, and thus one can redefine their meaning by providing different definitions of the infix functions within objects. As well as the standard mathematic binary operators, the <code>is</code> operator can be used to test two objects for identity equality.
 
 
 <hr>
@@ -692,6 +679,6 @@ Converge supports full garbage collection. Users do not need to concern themselv
 
 <h2>Compile-time meta-programming</h2>
 
-A separate document gives a <a href="../ctmp">guide to compile-time meta-programming</a>.
+Compile-time meta-programming allows the programmer to interact with the compiler at compile-time and perform tasks such as code generation. A separate document describes <a href="../ctmp">compile-time meta-programming</a>.
 
 <!--#include virtual="/footer.inc" -->
