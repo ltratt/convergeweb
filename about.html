@@ -47,7 +47,7 @@ func fibs_upto(n):
 
 cfibs := $&lt;fibs_upto(30)&gt;
 </pre>
-This makes the resulting binary run approximately 400 times faster.
+This makes the resulting binary run approximately 400 times faster. Of course, generating little examples like this is trivial. But Converge makes building large Abstract Syntax Trees (ASTs) easy via quasi-quoting, which allows ASTs to be built using concrete syntax. Simply surround normal expressions with <code>[| ... |]</code> to generate the corresponding AST.
 
 
 <h2>Domain specific language implementation</h2>
