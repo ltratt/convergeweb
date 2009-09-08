@@ -1,0 +1,407 @@
+<html>
+<head><title>CEI</title>
+<body>
+<p align="right"><a href="modsindex.html">Modules index</a>
+<hr>
+<h1 align="center">CEI</h1>
+
+
+This is the <q>Compiler External Interface</q> module which is the recommended way for the user to interact with the Converge compiler. This module necessarily contains a diverse range of functionality.
+
+<h3>Error reporting</h3>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="error"><code>func error(msg, src_infos := null):</code></a>
+
+Reports the error in <code>msg</code> to the user, pinpointing it as occurring at <code>src_infos</code> positions if that is non-null. Once the error is reported, compilation stops, and an error code is returned.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="warning"><code>func warning(msg, src_infos := null):</code></a>
+
+Reports the warning in <code>msg</code> to the user, pinpointing it as occurring at <code>src_infos</code> positions if that is non-null. Once the error is reported, compilation continues as normal.
+</div>
+
+
+<h3>Eval</h3>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="eval"><code>func eval(expr, vars := Dict{}, includes := []):</code></a>
+
+Dynamically evaluates the expression specified in the string <code>expr</code>, returning its result (which may be to fail). The expression is evaluated in the context of variables defined in the dictionary <code>vars</code>; the values in this dictionary are updated after <code>expr&apos;s</code> evaluation to reflect any assignments to them during evaluation. <code>includes</code> specifies a list of module objects to be made available as imports to <code>expr</code>.
+
+<p>For example the following call to <code>eval</code>:
+<pre>
+vars := Dict{&quot;x&quot; : 2}
+rtn := CEI::eval(&quot;y := (x += 1) + 4&quot;, vars)
+Sys::println(rtn, &quot;: &quot;, vars)
+</pre>
+
+will result in the following output:
+<pre>
+7: Dict{&quot;x&quot; : 3, &quot;y&quot; : 7}
+</pre></p>
+</div>
+
+
+<h3>Generic compile-time meta-programming functions</h3>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="fresh_name"><code>func fresh_name(name := null):</code></a>
+
+Returns the name of a guaranteed <q>fresh</q> variable name (i.e. a variable name which won&apos;t clash with another variable name). If <code>name</code> is non-<code>null</code>, then it should be a string, the contents of which will form part of the fresh variable name.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="lift"><code>func lift(obj, src_infos := null):</code></a>
+<q>Lifts</q> an object into its ITree equivalent i.e. turns a string into an IString, an int into a IInt etc. Container types such as lists are recursively converted into their ITree equivalent.
+</div>
+
+
+
+<h3>ITree functions</h3>
+
+<h4>Hygiene</h4>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="rename_itree"><code>func rename_itree(itree, vars := null):</code></a>
+
+Returns a version of <code>itree</code> where all externally visible free / bound variables which are mentioned in the keys of <code>vars</code> are renamed to the corresponding value. If <code>vars</code> is null, then all externally visible free / bound variables are renamed to fresh names.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="embeddable_itree"><code>func embeddable_itree(itree, except_vars := Set{}):</code></a>
+
+This function is intended to be used on <q>external</q> ITrees which one wishes to embed in an AST being constructed. The external AST may have dynamically scoped references to variables which the AST it is embedded into should not interfere with. Thus this function renames all externally visible free / bound variables other than those in <code>except_vars</code> to fresh names. It then returns a list of IRename instances which can be easily inserted into a <code>rename</code> declaration.
+</div>
+
+
+<h4>Pretty printing</h4>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="pp_itree"><code>func pp_itree(itree):</code></a>
+
+Returns a string representing the pretty-printed ITree <code>itree</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="pp_itree_elided"><code>func pp_itree_elided(itree, self_mod_id := null):</code></a>
+
+Returns an elided string representing the pretty-printed ITree <code>itree</code>. This function will try to elide extraneous, cluttering, details from the pretty-printed ITree, but in so doing can return misleading and incorrect representations. Chiefly it tries to pretty print module lookups in a <q>human readable</q> fashion; if <code>self_mod_id</code> is non-<code>null</code> any module lookup within a module of that Id will be elided still further. Both these mechanisms can cause problems in certain situations. It is recommended that users always use <code><a href="#pp_itree">pp_itree</a></code> initially, falling back on this elided representation only when the output from the former is untelligible.
+</div>
+
+
+<h4>ITree definitions and expressions</h4>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="imodule"><code>func imodule(module_name, defns, src_infos):</code></a>
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iclass_def"><code>func iclass_def(class_name, supers, metaclass_, fields, src_infos):</code></a>
+
+Returns an IClass_Def whose: name is the string <code>class_name</code>; superclasses are defined by the list of IExpr&apos;s <code>supers</code>; metaclass is specified by the IExpr <code>metaclass_</code>, or <code>null</code> if there is no metaclass; fields are specified by the list of IAssignment&apos;s or IFunc_Def&apos;s <code>fields</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="ifunc_def"><code>func ifunc_def(is_bound, func_name, params, var_arg, nonlocals, renames, body, src_infos):</code></a>
+
+Returns an IFunc_Def which is a bound function if <code>is_bound</code> is <code>1</code> and unbound if it is <code>0</code> (other values of <code>is_bound</code> lead to undefined behaviour). The resulting IFunc_Def has: name is the string <code>func_name</code> (which can be the empty string if the function is anonymous); parameters are defined by the list of IParam&apos;s <code>params</code>; var arg is defined by the IVar <code>var_arg</code>, or null if no var arg is specified; nonlocals are defined by the list of IVar&apos;s <code>nonlocals</code>; renames are defined by the list of <code>[<emph>from</emph>, <emph>to</emph>]</code> pairs in <code>renames</code>; body is defined by the IExpr_Seq <code>body</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iif"><code>func iif(clauses, else_body, src_infos):</code></a>
+
+Returns an IIf whose: main clauses are defined by the list of IClause&apos;s <code>clauses</code>; else branch is defined by the IExpr_Seq <code>else_body</code>, or null if there is no else branch.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="indif"><code>func indif(clauses, src_infos):</code></a>
+
+Returns an INDIf whose main clauses are defined by the list of IClause&apos;s <code>clauses</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="ivar"><code>func ivar(name, src_infos):</code></a>
+
+Returns an IVar whose name is defined by the string <code>name</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iimport"><code>func iimport(mod_path, var_name, src_infos):</code></a>
+
+Returns an IImport which imports the module referenced by <code>mod_path</code> to the variable whose name is defined by the string <code>var_name</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iwhile"><code>func iwhile(condition, body, exhausted_body, broken_body, src_infos):</code></a>
+
+Returns an IWhile whose: condition is defined by the IExpr <code>condition</code>; main body is defined by the IExpr_Seq <code>body</code>; exhausted body is defined by the IExpr_Seq <code>exhausted_body</code>, or <code>null</code> if no exhausted body is specified; broken body is defined by the IExpr_Seq <code>broken_body</code>, or <code>null</code> if no broken body is specified.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="ifor"><code>func ifor(condition, body, exhausted_body, broken_body, src_infos):</code></a>
+
+Returns an IFor whose: condition is defined by the IExpr <code>condition</code>; main body is defined by the IExpr_Seq <code>body</code>; exhausted body is defined by the IExpr_Seq <code>exhausted_body</code>, or <code>null</code> if no exhausted body is specified; broken body is defined by the IExpr_Seq <code>broken_body</code>, or <code>null</code> if no broken body is specified.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iint"><code>func iint(val, src_infos):</code></a>
+
+Returns an IInt whose value is that of the integer <code>val</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="istring"><code>func istring(val, src_infos):</code></a>
+
+Returns an IString whose value is that of the string <code>val</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="islot_lookup"><code>func islot_lookup(target, slot_name, src_infos):</code></a>
+
+Returns an ISlot_Lookup which looks up the slot defined in the string <code>slot_name</code> in the IExpr defined in <code>target</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="imodule_lookup"><code>func imodule_lookup(target, def_name, src_infos):</code></a>
+
+Returns an IModule_Lookup which looks up the slot defined in the string <code>slot_name</code> in the IExpr defined in <code>target</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="ilist"><code>func ilist(elems, src_infos):</code></a>
+
+Returns an IList whose elements are the list of IExpr&apos;s in <code>elems</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="idict"><code>func idict(elems, src_infos):</code></a>
+
+Returns an IDict whose elements are specified in the list of IDict_Elems <code>elems</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iset"><code>func iset(elems, src_infos):</code></a>
+
+Returns an ISet whose elements are the list of IExpr&apos;s in <code>elems</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iapplication"><code>func iapplication(target, args, src_infos):</code></a>
+
+Returns an IApplication of the list of IExpr <code>args</code> to the function specified in the IExpr <code>target</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iget"><code>func iget(target, index, src_infos):</code></a>
+
+Returns an IGet (i.e. <code><emph>target</emph>[<emph>index</emph>]</code>) which looks up the index element specified by the IExpr <code>index</code> in the object specified by the IExpr <code>target</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="islice"><code>func islice(target, lower_bound, upper_bound, src_infos):</code></a>
+
+Returns an ISlice (i.e. <code><emph>target</emph>[<emph>index</emph>]</code>) which looks up the index element specified by the IExpr <code>index</code> in the object specified by the IExpr <code>target</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iexbi"><code>func iexbi(target, field_name, src_infos):</code></a>
+
+Returns an IEXBI which looks up the field specified by the string <code>field_name</code> in the IExpr <code>target</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="ireturn"><code>func ireturn(expr, src_infos):</code></a>
+
+Returns an IReturn which returns the value of the IExpr <code>expr</code>, which may be <code>null</code> if the default return value is to be returned.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iyield"><code>func iyield(expr, src_infos):</code></a>
+
+Returns an IYield which returns the value of the IExpr <code>expr</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="ifail"><code>func ifail(src_infos):</code></a>
+
+Returns an IFail which both returns the current function and transmits failure to the functions caller.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iraise"><code>func iraise(expr, src_infos):</code></a>
+
+Returns an IRaise which raises the expression specified by the IExpr <code>expr</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iassert"><code>func iassert(expr, src_infos):</code></a>
+
+Returns an IAssert which checks the assertion in the expression specified by the IExpr <code>expr</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="ibreak"><code>func ibreak(src_infos):</code></a>
+
+Returns an IBreak.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="icontinue"><code>func icontinue(src_infos):</code></a>
+
+Returns an IContinue.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iconjunction"><code>func iconjunction(exprs, src_infos):</code></a>
+
+Returns an IConjunction of the list of IExpr&apos;s in <code>exprs</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="ialternation"><code>func ialternation(exprs, src_infos):</code></a>
+
+Returns an IAlternation of the list of IExpr&apos;s in <code>exprs</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iassignment"><code>func iassignment(type, targets, expr, src_infos):</code></a>
+
+Returns an IAssignment whose: <code>type</code> must be one of <code><a href="#STD_ASSIGN">STD_ASSIGN</a></code>, <code><a href="#ADD_ASSIGN">ADD_ASSIGN</a></code>, <code><a href="#SUB_ASSIGN">SUB_ASSIGN</a></code>, <code><a href="#MUL_ASSIGN">MUL_ASSIGN</a></code>, or <code><a href="#DIV_ASSIGN">DIV_ASSIGN</a></code>; targets are defined by the non-empty list <code>targets</code> of IVar&apos;s, IGet&apos;s, or ISlot_Lookup&apos;s; expression is specified by the IExpr <code>expr</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="inot"><code>func inot(expr, src_infos):</code></a>
+
+Returns an INot which checks the expression specified by the IExpr <code>expr</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="ibinary"><code>func ibinary(type, lhs, rhs, src_infos):</code></a>
+
+Returns an IBinary whose: <code>type</code> must be one of <code><a href="#BINARY_ADD">BINARY_ADD</a></code>, <code><a href="#BINARY_SUB">BINARY_SUB</a></code>, <code><a href="#BINARY_MUL">BINARY_MUL</a></code>, <code><a href="#BINARY_DIV">BINARY_DIV</a></code>, or <code><a href="#BINARY_MOD">BINARY_MOD</a></code>; left hand side expression is specified by the IExpr <code>lhs</code>; right hand side expression is specified by the IExpr <code>rhs</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="icomparison"><code>func icomparison(type, lhs, rhs, src_infos):</code></a>
+
+Returns an IComparison whose: <code>type</code> must be one of <code><a href="#IS_COMPARISON">IS_COMPARISON</a></code>, <code><a href="#EQ_COMPARISON">EQ_COMPARISON</a></code>, <code><a href="#NEQ_COMPARISON">NEQ_COMPARISON</a></code>, <code><a href="#LEQ_COMPARISON">LEQ_COMPARISON</a></code>, <code><a href="#GEQ_COMPARISON">GEQ_COMPARISON</a></code>, <code><a href="#LE_COMPARISON">LE_COMPARISON</a></code>, or <code><a href="#GE_COMPARISON">GE_COMPARISON</a></code>; left hand side expression is specified by the IExpr <code>lhs</code>; right hand side expression is specified by the IExpr <code>rhs</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="ipass"><code>func ipass(src_infos):</code></a>
+
+Returns an IPass.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iinsert"><code>func iinsert(expr, src_infos):</code></a>
+
+Returns an INot which inserts the expression specified by the IExpr <code>expr</code> into a surrounding quasi-quoted expression.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iquasi_quotes"><code>func iquasi_quotes(body, extra_src_infos, src_infos):</code></a>
+
+Returns an IQuasi_Quotes which quasi-quotes the IExpr_Seq <code>body</code>, adding extra src infos specified by <code>extra_src_infos</code> which may be <code>null</code> if no extra src infos are to be added to the resulting ITree.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="imod_id_import"><code>func imod_id_import(mod_id, src_infos):</code></a>
+
+Returns an <code>IMod_Id_Import</code> which imports and returns the module with ID <code>mod_id</code>.
+</div>
+
+
+<h4>ITree <q>virtual</q> elements</h4>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="IExpr_Seq"><code>func IExpr_Seq(exprs, src_infos):</code></a>
+
+Returns an IExpr_Seq of the non-empty list of IExpr&apos;s <code>exprs</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iparam"><code>func iparam(var, default, src_infos):</code></a>
+
+Returns an IParam whose name is defined by the IVar <code>name</code>, and whose default value is specified by the IExpr <code>default</code> or <code>null</code> if there is no default value.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="idict_elem"><code>func idict_elem(key, val, src_infos):</code></a>
+
+Returns an IDict_Elem whose key is <code>key</code>, and whose value is <code>val</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="irename"><code>func irename(from, as_, src_infos):</code></a>
+
+Returns an IReturn from the IVar <code>from</code> to the IVar <code>as_</code>.
+</div>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iclause"><code>func iclause(condition, body, src_infos):</code></a>
+
+Returns an IClause whose: condition is specified by the IExpr <code>condition</code>; body is specified by the IExpr_Seq <code>body</code>.
+</div>
+
+
+<h4>Assignment types</h4>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="STD_ASSIGN"><code>STD_ASSIGN</code></a>
+for the standard assignment operator <code>:=</code>.</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="ADD_ASSIGN"><code>ADD_ASSIGN</code></a>
+for the addition assignment operator <code>+=</code>.</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="SUB_ASSIGN"><code>SUB_ASSIGN</code></a>
+for the subtraction assignment operator <code>-=</code>.</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="MUL_ASSIGN"><code>MUL_ASSIGN</code></a>
+for the multiplication assignment operator <code>*=</code>.</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="DIV_ASSIGN"><code>DIV_ASSIGN</code></a>
+for the division assignment operator <code>/=</code>.</div>
+
+
+
+<h4>Binary operator types</h4>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="BINARY_ADD"><code>BINARY_ADD</code></a>
+for the binary operator <code>+</code>.</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="BINARY_SUB"><code>BINARY_SUB</code></a>
+for the binary operator <code>-</code>.</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="BINARY_MUL"><code>BINARY_MUL</code></a>
+for the binary operator <code>*</code>.</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="BINARY_DIV"><code>BINARY_DIV</code></a>
+for the binary operator <code>/</code>.</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="BINARY_MOD"><code>BINARY_MOD</code></a>
+for the binary operator <code>%</code>.</div>
+
+
+
+<h4>Comparison operator types</h4>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="IS_COMPARISON"><code>IS_COMPARISON</code></a>
+for the comparison operator <code>is</code>.</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="EQ_COMPARISON"><code>EQ_COMPARISON</code></a>
+for the comparison operator <code>==</code>.</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="NEQ_COMPARISON"><code>NEQ_COMPARISON</code></a>
+for the comparison operator <code>!=</code>.</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="LEQ_COMPARISON"><code>LEQ_COMPARISON</code></a>
+for the comparison operator <code>&lt;=</code>.</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="GEQ_COMPARISON"><code>GEQ_COMPARISON</code></a>
+for the comparison operator <code>&gt;=</code>.</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="LE_COMPARISON"><code>LE_COMPARISON</code></a>
+for the comparison operator <code>&lt;</code>.</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="GE_COMPARISON"><code>GE_COMPARISON</code></a>
+for the comparison operator <code>&gt;</code>.</div>
+
+
+
+<hr>
+<p align="right">cvd_to_html &copy;2006-2007 <A HRef = "http://tratt.net/laurie/">Laurence Tratt</A></p>
+</body>
+</html>

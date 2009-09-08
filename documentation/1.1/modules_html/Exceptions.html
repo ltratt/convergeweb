@@ -1,0 +1,81 @@
+<html>
+<head><title>Exceptions</title>
+<body>
+<p align="right"><a href="modsindex.html">Modules index</a>
+<hr>
+<h1 align="center">Exceptions</h1>
+
+<h3>Main Exception classes</h3>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="User_Exception"><code>class User_Exception</code></a>:<br>
+
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Internal_Exception"><code>class Internal_Exception</code></a>:<br>
+
+</div>
+
+
+<h3>User exceptions</h3>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Apply_Exception"><code>class Apply_Exception</code></a>:<br>
+
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Bounds_Exception"><code>class Bounds_Exception</code></a>:<br>
+
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Import_Exception"><code>class Import_Exception</code></a>:<br>
+
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Indices_Exception"><code>class Indices_Exception</code></a>:<br>
+
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Key_Exception"><code>class Key_Exception</code></a>:<br>
+
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Number_Exception"><code>class Number_Exception</code></a>:<br>
+
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Slot_Exception"><code>class Slot_Exception</code></a>:<br>
+
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Type_Exception"><code>class Type_Exception</code></a>:<br>
+
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Unpack_Exception"><code>class Unpack_Exception</code></a>:<br>
+
+</div>
+
+
+<h3>Internal exceptions</h3>
+
+These are exceptions which should not ever be explicitly considered by users. They are either the result of an internal problem with the Converge VM, or relate to an internal implementation detail which may be subject to change.
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="System_Exit_Exception"><code>class System_Exit_Exception</code></a>:<br>
+
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="VM_Exception"><code>class VM_Exception</code></a>:<br>
+
+</div>
+
+
+<h3>Module functions</h3>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="backtrace"><code>func backtrace(e):</code></a>
+
+Returns a string of the backtrace encoded in the exception <code>e</code>. <code>e</code> itself should be an exception that has been <code>raise</code>d i.e. it does not make sense to represent a backtrace from an exception object unless it has actually been raised.
+</div>
+
+<hr>
+<p align="right">cvd_to_html &copy;2006-2007 <A HRef = "http://tratt.net/laurie/">Laurence Tratt</A></p>
+</body>
+</html>

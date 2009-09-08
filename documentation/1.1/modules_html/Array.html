@@ -1,0 +1,58 @@
+<html>
+<head><title>Array</title>
+<body>
+<p align="right"><a href="modsindex.html">Modules index</a>
+<hr>
+<h1 align="center">Array</h1>
+
+This module provides an efficient mechanism for storing and manipulating large numbers of primitive machine types.
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Array"><code>class Array</code></a>:<br>
+
+Array objects are created by calling the following function on the <code>Array</code> class object:
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Array$$new"><code>func new(type, d := null):</code></a>
+
+Creates an array of the type specified by <code>type</code>:
+<table>
+<tr><td><code>f</code></td><td>Array of floats (size determined by architecture / OS).</td></tr>
+<tr><td><code>i</code></td><td>Array of integers (size determined by architecture / OS).</td></tr>
+<tr><td><code>i32</code></td><td>Array of 32-bit integers.</td></tr>
+<tr><td><code>i64</code></td><td>Array of 64-bit integers.</td></tr>
+</table>
+If <code>d</code> is not <code>null</code>, it is taken to be a string representing the underlying data and which is added to the array via <code><a href="Array.html#$extend_from_string">extend_from_string</a></code>.
+</div>
+
+Array objects support the following functions:
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Array$append"><code>func append(o):</code></a>
+
+Adds <code>o</code> to the end of the array. <code>o</code> must be of an appropriate type and value for this array.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Array$extend"><code>func extend(c):</code></a>
+
+Appends each element returned by <code>c.iter()</code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Array$extend_from_string"><code>func extend_from_string(s):</code></a>
+
+Extends this array with data from string which is assumed to be a raw representation of this arrays&apos; data type. <code>s.len()</code> must be a multiple of this arrays&apos; data type.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Array$get"><code>func get(i):</code></a>
+
+Returns the element at position <code>i</code>, raising an exception if <code>i</code> is out of bounds.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Array$get_slice"><code>func get_slice(lower := 0, upper := self.len()):</code></a>
+
+Returns a sub-array of the elements from position <code>lower</code> (inclusive) to <code>upper</code> (exclusive). An exception is raised if either index is out of bounds.
+</div>
+</div>
+
+
+<hr>
+<p align="right">cvd_to_html &copy;2006-2007 <A HRef = "http://tratt.net/laurie/">Laurence Tratt</A></p>
+</body>
+</html>
