@@ -1,0 +1,57 @@
+<html>
+<head><title>Sys</title>
+<body>
+<p align="right"><a href="modsindex.html">Modules index</a>
+<hr>
+<h1 align="center">Sys</h1>
+
+This module defines a number of important values:
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="argv"><code>argv</code></a>:
+
+A list containing the command line arguments passed to the Converge program.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="program_path"><code>program_path</code></a>:
+
+A string containing the path of the current program. NB: This may be set to null (e.g. if the program was loaded from memory), and if present may not be a fully canonicalized path.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="stdin"><code>stdin</code></a>:
+
+A <code><a href="File.html#File">File</a></code> object representing standard input.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="stdout"><code>stdout</code></a>:
+
+A <code><a href="File.html#File">File</a></code> object representing standard input.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="version"><code>version</code></a>:
+
+A string denoting the version of the Converge virtual machine. Versions can be of any format (e.g. <code>1.2</code>, <code>1.1-beta</code>, <code>current</code>). Thus one can not determine whether one version string represents a &quot;newer&quot; version than another; one can simply test whether two version strings denote different versions not.
+</div>
+
+Important functions and classes in this module are as follows:
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="exit"><code>func exit(code):</code></a>
+
+Exits the program with exit code <code>code</code> which must be an integer.
+
+<p>More correctly this raises a <code><a href="Exceptions.html#System_Exit_Exception">System_Exit_Exception</a></code> which is caught as a special case by the &quot;outer&quot; Converge program.</p>
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="print"><code>func print(*s):</code></a>
+
+Prints all arguments passed to it to standard out. Strings are printed as is; all other objects have their <code>to_str</code> function called.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="println"><code>func println(*s):</code></a>
+
+Prints all arguments passed to it to standard out, and then prints a trailing newline. Strings are printed as is; all other objects have their <code>to_str</code> function called.
+</div>
+
+<hr>
+<p align="right">cvd_to_html &copy;2006-2007 <A HRef = "http://tratt.net/laurie/">Laurence Tratt</A></p>
+</body>
+</html>
