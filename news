@@ -1,4 +1,9 @@
 <tr>
+<td style="padding-right: 10px; vertical-align: top; font-weight: bold">2012/02/06</td>
+<td><a href="releases/current.html">Pre-built binaries of the new VM are now downloadable for most popular platforms.</a></td>
+</tr>
+<tr>
+<tr>
 <td style="padding-right: 10px; vertical-align: top; font-weight: bold">2012/01/17</td>
 <td><a href="https://github.com/ltratt/converge">A new RPython-based VM is now a drop-in replacement for most tasks, and is 3-10x faster than the old VM</a>.</td>
 </tr>
