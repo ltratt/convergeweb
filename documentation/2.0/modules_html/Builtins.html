@@ -1,0 +1,402 @@
+<html>
+<head><title>Builtins</title>
+<body>
+<p align="right"><a href="modsindex.html">Modules index</a>
+<hr>
+<h1 align="center">Builtins</h1>
+
+
+This module provides access to the builtin Converge types.
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Class"><code>class Class</code></a>:<br>
+
+The standard class <code>Class</code>.
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="conformed_by"><code>func conformed_by(o):</code></a>
+
+Succeeds if <code>o</code> contains correspondingly named slots as each field in this class and its superclasses. Note that <code>o</code> may also contain other slots beyond this.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="instantiated"><code>func instantiated(o):</code></a>
+
+Succeeds if this class (or one of its subclasses) instantiated <code>o</code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="get_field"><code>func get_field(name):</code></a>
+
+Returns the field <code>name</code> in the class, raising an exception if it does not exist.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iter_defns"><code>func iter_defns():</code></a>
+
+Successively generates each (field name, field value) pair for the class (note that this does <em>not</em> include slots defined in superclasses).
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="set_field"><code>func set_field(name, val):</code></a>
+
+Sets the value of field <code>name</code> to <code>val</code>, creating <code>name</code> if it did not previously exist.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="get_supers"><code>func get_supers():</code></a>
+
+Returns a list of all this parents superclasses.
+</div>
+</div>
+
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Dict"><code>class Dict</code></a>:<br>
+
+The standard class <code>Dict</code>.
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="del"><code>func del(o):</code></a>
+
+Deletes the entry <code>o</code>. If &apos;o&apos; is not found an exception is raised.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="extend"><code>func extend(o):</code></a>
+
+Adds every element from the dictoinary <code>o</code> into the dictionary. Key conflicts are resolved in favour of <code>o</code> i.e. elements in <code>o</code> overwrite elements in the dictionary being extended.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="find"><code>func find(o, default := fail):</code></a>
+
+Returns the value of <code>key</code>. If &apos;key&apos; is not found, &apos;default&apos; is returned or, if no default value is specified, it fails. Note that unlike many other fuctions named <code>find</code>, this only returns a single value.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="get"><code>func get(o, default := fail):</code></a>
+
+Returns the value of <code>key</code>. If &apos;key&apos; is not found, &apos;default&apos; is returned or, if no default value is specified, an exception is raised.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iter"><code>func iter():</code></a>
+
+Successively generates each <code>[key, val]</code> pair in this dictionary.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iter_keys"><code>func iter_keys():</code></a>
+
+Successively generates each key in this dictionary.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="len"><code>func len():</code></a>
+
+Returns the number of keys in this dictionary.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="set"><code>func set(key, val):</code></a>
+
+Sets the value of <code>key</code> to <code>val</code>. If <code>key</code> was previously associated with a value, <code>val</code> overwrites the previous association. Returns null.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iter_vals"><code>func iter_vals():</code></a>
+
+Successively generates each value in this dictionary.
+</div>
+</div>
+
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Int"><code>class Int</code></a>:<br>
+
+Implements all the standard <code><a href="#Number">Number</a></code> functions with the following addition:
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="idiv"><code>func idiv(n):</code></a>
+
+Returns the integer value of dividing this integer by <code>n</code>.
+</div>
+</div>
+
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="List"><code>class List</code></a>:<br>
+
+The standard class <code>List</code>.
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="append"><code>func append(o):</code></a>
+
+Adds <code>o</code> to the end of the list.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="del"><code>func del(i):</code></a>
+
+Deletes the element at position <code>i</code>, raising an exception if <code>i</code> is out of bounds.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="extend"><code>func extend(c):</code></a>
+
+Appends each element returned by <code>c.iter()</code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="find"><code>func find(o):</code></a>
+
+Successively generates each element in the list which compares equal to <code>o</code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="find_index"><code>func find_index(o):</code></a>
+
+Successively generates the index of each element in the list which compares equal to <code>o</code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="flattened"><code>func flattened():</code></a>
+
+Returns a copy of this list with each sub-list recursively flattened. e.g. <code>flattened([1, 2, [3, [4, 5]], 6])</code> returns <code>[1, 2, 3, 4, 5, 6]</code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="get"><code>func get(i):</code></a>
+
+Returns the element at position <code>i</code>, raising an exception if <code>i</code> is out of bounds.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="get_slice"><code>func get_slice(lower := 0, upper := self.len()):</code></a>
+
+Returns a sub-list of the elements from position <code>lower</code> (inclusive) to <code>upper</code> (exclusive). An exception is raised if either index is out of bounds.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="insert"><code>func insert(i, o):</code></a>
+
+Inserts <code>o</code> at position <code>i</code>, causing the original values of position <code>i</code> (inclusive) to <code>self.len()</code> (exclusive) to be shuffled up by one position. An exception is raised if <code>i</code> is out of bounds.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iter"><code>func iter(lower := 0, upper := self.len()):</code></a>
+
+Successively generates, in order, each value in the list.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="len"><code>func len():</code></a>
+
+Returns the number of entries in the list.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="pop"><code>func pop():</code></a>
+
+Deletes the last position in the list, returning that positions value.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="remove"><code>func remove(o):</code></a>
+
+Successively deletes, in order, each element which equals <code>o</code>. Returns the value of that entry on each successful deletion, failing when no elements remain to be deleted.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="riter"><code>func riter():</code></a>
+
+Successively generates, in reverse order, each value in the list.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="set"><code>func set(i, val):</code></a>
+
+Sets the value at position <code>i</code> to <code>val</code>. Raises an exception if <code>i</code> is out of bounds.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="set_slice"><code>func set_slice(lower := 0, upper := self.len(), c):</code></a>
+
+Effectively deletes the elements from position <code>lower</code> (inclusive) to <code>upper</code> (exclusive) and then successively inserts each element returned by <code>c.iter()</code> at position <code>lower + <em>position in c</em></code>. An exception is raised if either index is out of bounds.
+</div>
+</div>
+
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Module"><code>class Module</code></a>:<br>
+
+The standard class <code>Module</code>.
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Module$$new"><code>func new(bc):</code></a>
+
+Creates a new module from the string <code>bc</code>, which should be the contents of a <code>.cvb</code> file.
+</div>
+
+Module objects have the following slots:
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="defn_names"><code>func defn_names():</code></a>
+
+Successively generates each definition name in the module.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="get_defn"><code>func get_defn(name):</code></a>
+
+Returns the definition named <code>name</code> in this module.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="set_defn"><code>func set_defn(name, val):</code></a>
+
+Sets the value of the definition named <code>name</code> in this module to <code>val</code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iter_defns"><code>func iter_defns():</code></a>
+
+Successively generates each (definition name, definition value) pair for the module.
+</div>
+</div>
+
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Number"><code>class Number</code></a>:<br>
+
+The standard class <code>Number</code>.
+</div>
+
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Object"><code>class Object</code></a>:<br>
+
+The standard class <code>Object</code>.
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="init"><code>func init():</code></a>
+
+The standard object initialisation function; effectively a no-op.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="find_slot"><code>func find_slot(name):</code></a>
+
+Returns the value of the slot <code>name</code>, or fails if no such slot exists.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="get_slot"><code>func get_slot(name):</code></a>
+
+Returns the value of the slot <code>name</code>, raising an exception if no such slot exists.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iter_slots"><code>func iter_slots():</code></a>
+
+Successively generates each (slot name, slot value) pair for the object.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="set_slot"><code>func set_slot(name, val):</code></a>
+
+Sets the value of slot <code>name</code> to <code>val</code>, creating <code>name</code> if it did not previously exist.
+</div>
+</div>
+
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Set"><code>class Set</code></a>:<br>
+
+The standard class <code>Set</code>. Note that Converge&apos;s sets are mutable.
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="add"><code>func add(o):</code></a>
+
+Adds <code>o</code> to the set, overwriting the previous object which compared equal to <code>o</code> if it existed.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="complement"><code>func complement(s):</code></a>
+
+Returns a new set which contains every element of <code>self</code> which is not in <code>o</code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="del"><code>func del(o):</code></a>
+
+Removes the entry <code>o</code>. If &apos;o&apos; is not found an exception is raised.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="extend"><code>func extend(c):</code></a>
+
+Successively adds each element returned by <code>c.iter()</code> to the set.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="find"><code>func find(o, default := fail):</code></a>
+
+Returns the object which compares equal to <code>o</code>. If no such object is not found, &apos;default&apos; is returned or, if no default value is specified, it fails. Note that unlike many other fuctions named <code>find</code>, this only returns a single value.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iter"><code>func iter():</code></a>
+
+Successively generates each value in the set.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="len"><code>func len():</code></a>
+
+Returns the number of entries in the set.
+</div>
+</div>
+
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="String"><code>class String</code></a>:<br>
+
+The standard class <code>String</code>. Note that Converge&apos;s strings are immutable, and the API is designed with this in mind.
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="find"><code>func find(s):</code></a>
+
+Successively generates each substring which matches <code>s</code> (in practice this means that &apos;s&apos; itself will be returned for each match, but is defined this way for consistency with other <code>find</code> functions).
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="find_index"><code>func find_index(s):</code></a>
+
+Successively generates, in order, the starting index of each substring which matches <code>s</code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="get"><code>func get(i):</code></a>
+
+Returns the character at position <code>i</code>, raising an exception if <code>i</code> is out of bounds.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="hash"><code>func hash():</code></a>
+
+Returns this strings hash value.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="get_slice"><code>func get_slice(lower := 0, upper := self.len()):</code></a>
+
+Returns a sub-string of the characters from position <code>lower</code> (inclusive) to <code>upper</code> (exclusive). An exception is raised if either index is out of bounds.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="iter"><code>func iter(lower := 0, upper := self.len()):</code></a>
+
+Successively generates, in order, each character in the string.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="len"><code>func len():</code></a>
+
+Returns the number of characters in the string.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="lower_cased"><code>func lower_cased():</code></a>
+
+Returns a copy of this string with all characters converted to lower case.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="lstripped"><code>func lstripped():</code></a>
+
+Returns a copy of this string with all whitespace (tabs, spaces, newlines) removed from its left hand side.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="prefixed_by"><code>func prefixed_by(s, i := 0):</code></a>
+
+Succeeds if the string starting at position <code>i</code> matches <code>s</code> in its entirety.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="rfind_index"><code>func rfind_index(s):</code></a>
+
+Successively generates, in reverse order, the starting index of each substring which matches <code>s</code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="split"><code>func split(s):</code></a>
+
+Splits the string on each instance of <code>s</code>, returning a list of the result.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="stripped"><code>func stripped():</code></a>
+
+Returns a copy of this string with all whitespace (tabs, spaces, newlines) removed from both its left and right hand side.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="suffixed_by"><code>func suffixed_by(s, i := self.len()):</code></a>
+
+Succeeds if the string ending at position <code>i</code> matches <code>s</code> in its entirety.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="replaced"><code>func replaced(old, new):</code></a>
+
+Returns a new string with each substring matching <code>old</code> replaced with <code>new</code>.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="upper_cased"><code>func upper_cased():</code></a>
+
+Returns a copy of this string with all characters converted to upper case.
+</div>
+</div>
+
+
+<hr>
+<p align="right">cvd_to_html &copy;2006-2007 <A HRef = "http://tratt.net/laurie/">Laurence Tratt</A></p>
+</body>
+</html>

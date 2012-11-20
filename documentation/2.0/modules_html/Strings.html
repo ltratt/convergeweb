@@ -1,0 +1,33 @@
+<html>
+<head><title>Strings</title>
+<body>
+<p align="right"><a href="modsindex.html">Modules index</a>
+<hr>
+<h1 align="center">Strings</h1>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="format"><code>func format(format, *args):</code></a>
+
+Returns a string based on the format string <code>format</code> which is <code>printf</code>-esque in nature and consumes arguments from <code>args</code>. Valid specifiers are <code>%s</code> for strings and <code>%d</code> for numbers.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="join"><code>func join(list, separator):</code></a>
+
+Concatenates <code>list</code> into a string inserting <code>separator</code> between each item in list.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="split"><code>func split(str, separator):</code></a>
+
+Splits the string <code>str</code> at each instance of the string <code>separator</code>, returning a list of the split string.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="lcp"><code>func lcp(strings):</code></a>
+
+Returns the longest common prefix of the strings in <code>strings</code>. e.g. <code>lcp([&quot;aab&quot;, &quot;aca&quot;, &quot;a&quot;])</code> will return <code>&quot;a&quot;</code> while <code>lcp([&quot;aab&quot;, &quot;aca&quot;, &quot;b&quot;])</code> will return <code>&quot;&quot;</code>.
+</div>
+
+
+<hr>
+<p align="right">cvd_to_html &copy;2006-2007 <A HRef = "http://tratt.net/laurie/">Laurence Tratt</A></p>
+</body>
+</html>

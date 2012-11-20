@@ -1,0 +1,57 @@
+<html>
+<head><title>PCRE</title>
+<body>
+<p align="right"><a href="modsindex.html">Modules index</a>
+<hr>
+<h1 align="center">PCRE</h1>
+
+
+This module provides regular expression functions. See the <a href="http://www.pcre.org/pcre.txt">PCRE</a> documentation for the syntax and options that PCRE provides.
+
+<p>Important functions and classes in the <code>PCRE</code> module are as follows:</p>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="compile"><code>func compile(pattern):</code></a>
+
+Compiles the string <code>pattern</code> and returns a regular expression object.
+</div>
+
+
+<h3>Regular expression objects</h3>
+
+<p>Regular expression objects have the following slots:</p>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="match"><code>func match(s, i := 0):</code></a>
+
+Attempts to match the regular expression against string <code>s</code>. <code>match</code> anchors its match to a particular position <code>i</code> which defaults to <code>0</code>. In other words, if the regular expression does not match at that position, it does not search through the string looking for another position to match at.
+
+<p>If the match succeeds, a match object is returned; otherwise the function fails.</p>
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="search"><code>func search(s, i := 0):</code></a>
+
+Successively generates all match objects where the regular expression matches against the string <code>s</code>. The search starts at position <code>i</code>, which defaults to <code>0</code>.
+
+<p>For each successful search, a match object is generated; when no more matches are found, the function fails.</p>
+</div>
+
+
+<h3>Match objects</h3>
+
+<p>Match objects have the following slots:</p>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="get"><code>func get(group_num):</code></a>
+
+Returns the slice of the string matched by the group numbered <code>group_num</code>. Groups are specified within a regular expression by use of parentheses, and are numbered starting from 1. There is an implicit group 0 which returns the entire string matched by the regular expression.
+
+<p>Note that this effect can also be achieved via the slice notation i.e. <code>match.get(<em>X</em>)</code> is equivalent to <code>match[<em>X</em>]</code>.</p>
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="get_indexes"><code>func get_indexes(group_num):</code></a>
+
+Returns the start and end indices as a list <code>[start, end]</code> of the string matched by the group numbered <code>group_num</code>. Groups are specified within a regular expression by use of parentheses, and are numbered starting from 1. There is an implicit group 0 which returns the start and end indices of the entire string matched by the regular expression.
+</div>
+
+<hr>
+<p align="right">cvd_to_html &copy;2006-2007 <A HRef = "http://tratt.net/laurie/">Laurence Tratt</A></p>
+</body>
+</html>

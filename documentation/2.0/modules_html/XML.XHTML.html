@@ -1,0 +1,495 @@
+<html>
+<head><title>XML::XHTML</title>
+<body>
+<p align="right"><a href="modsindex.html">Modules index</a>
+<hr>
+<h1 align="center">XML::XHTML</h1>
+
+
+This module is intended as a simple way to build up XHTML documents. It does this by providing a simplified front-end for the creation of <code><a href="XDM.html#Nodes">XDM nodes</a></code>. Each XHTML element has a helper function which returns an <code><a href="XDM.Nodes.html#Elem">XML element</a></code> of the appropriate type. Optionally it can be given a list of children (strings or XML elements), and a dictionary of attributes (mapping strings to strings). A simple example is as follows:
+
+<pre style="padding-left: 20px">
+h1 := XHTML::h1([&quot;A title&quot;], Dict{&quot;align&quot; : &quot;right&quot;})
+</pre>
+
+
+<h3>Helper functions</h3>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="escape_str"><code>func escape_str(s):</code></a>
+
+Escapes illegal characters in <code>s</code>, replacing them with the appropriate XHTML entities. Note that since XHTML defines many more entities by default than base XML, this function may escape strings in a different way than <code><a href="XML.XDM.html#escape_str">XDM::escape_str</a></code>.
+</div>
+
+
+<h3>XHTML elements</h3>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="a"><code>func a(children := [], attrs := Dict{}):</code></a>
+
+Creates an <code>a</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="abbr"><code>func abbr(children := [], attrs := Dict{}):</code></a>
+
+Creates an <code>abbr</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="access"><code>func access(children := [], attrs := Dict{}):</code></a>
+
+Creates an <code>access</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="action"><code>func action(children := [], attrs := Dict{}):</code></a>
+
+Creates an <code>action</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="address"><code>func address(children := [], attrs := Dict{}):</code></a>
+
+Creates an <code>address</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="blockcode"><code>func blockcode(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>blockcode</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="blockquote"><code>func blockquote(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>blockquote</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="body"><code>func body(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>body</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="br"><code>func br(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>br</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="caption"><code>func caption(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>caption</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="cite"><code>func cite(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>cite</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="code"><code>func code(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>code</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="col"><code>func col(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>col</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="colgroup"><code>func colgroup(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>colgroup</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="dd"><code>func dd(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>dd</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="delete"><code>func delete(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>delete</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="dfn"><code>func dfn(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>dfn</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="di"><code>func di(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>di</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="dispatch"><code>func dispatch(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>dispatch</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="div"><code>func div(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>div</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="dl"><code>func dl(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>dl</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="dt"><code>func dt(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>dt</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="em"><code>func em(children := [], attrs := Dict{}):</code></a>
+
+Creates an <code>em</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="group"><code>func group(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>group</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="h1"><code>func h1(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>h1</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="h2"><code>func h2(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>h2</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="h3"><code>func h3(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>h3</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="h4"><code>func h4(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>h4</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="h5"><code>func h5(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>h5</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="h6"><code>func h6(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>h6</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="handler"><code>func handler(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>handler</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="head"><code>func head(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>head</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="heading"><code>func heading(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>heading</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="html"><code>func html(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>html</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="img"><code>func img(children := [], attrs := Dict{}):</code></a>
+
+Creates an <code>img</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="input"><code>func input(children := [], attrs := Dict{}):</code></a>
+
+Creates an <code>input</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="insert"><code>func insert(children := [], attrs := Dict{}):</code></a>
+
+Creates an <code>insert</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="kbd"><code>func kbd(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>kbd</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="l"><code>func l(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>l</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="label"><code>func label(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>label</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="li"><code>func li(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>li</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="link"><code>func link(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>link</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="load"><code>func load(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>load</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="message"><code>func message(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>message</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="meta"><code>func meta(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>meta</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="model"><code>func model(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>model</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="nl"><code>func nl(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>nl</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="object"><code>func object(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>object</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="ol"><code>func ol(children := [], attrs := Dict{}):</code></a>
+
+Creates an <code>ol</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="output"><code>func output(children := [], attrs := Dict{}):</code></a>
+
+Creates an <code>output</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="p"><code>func p(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>p</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="param"><code>func param(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>param</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="pre"><code>func pre(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>pre</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="quote"><code>func quote(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>quote</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="range"><code>func range(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>range</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="rebuild"><code>func rebuild(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>rebuild</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="recalculate"><code>func recalculate(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>recalculate</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="refresh"><code>func refresh(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>refresh</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="repeat"><code>func repeat(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>repeat</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="reset"><code>func reset(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>reset</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="revalidate"><code>func revalidate(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>revalidate</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="samp"><code>func samp(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>samp</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="secret"><code>func secret(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>secret</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="section"><code>func section(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>section</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="select1"><code>func select1(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>select1</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="select"><code>func select(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>select</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="send"><code>func send(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>send</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="separator"><code>func separator(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>separator</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="setfocus"><code>func setfocus(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>setfocus</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="setindex"><code>func setindex(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>setindex</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="setvalue"><code>func setvalue(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>setvalue</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="span"><code>func span(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>span</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="standby"><code>func standby(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>standby</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="strong"><code>func strong(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>strong</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="style"><code>func style(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>style</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="sub"><code>func sub(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>sub</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="submit"><code>func submit(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>submit</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="summary"><code>func summary(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>summary</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="sup"><code>func sup(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>sup</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="switch"><code>func switch(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>switch</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="table"><code>func table(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>table</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="tbody"><code>func tbody(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>tbody</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="td"><code>func td(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>td</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="textarea"><code>func textarea(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>textarea</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="tfoot"><code>func tfoot(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>tfoot</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="th"><code>func th(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>th</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="thead"><code>func thead(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>thead</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="title"><code>func title(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>title</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="tr"><code>func tr(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>tr</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="trigger"><code>func trigger(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>trigger</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="ul"><code>func ul(children := [], attrs := Dict{}):</code></a>
+
+Creates an <code>ul</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="upload"><code>func upload(children := [], attrs := Dict{}):</code></a>
+
+Creates an <code>upload</code> XHTML element.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="var"><code>func var(children := [], attrs := Dict{}):</code></a>
+
+Creates a <code>var</code> XHTML element.
+</div>
+
+
+<hr>
+<p align="right">cvd_to_html &copy;2006-2007 <A HRef = "http://tratt.net/laurie/">Laurence Tratt</A></p>
+</body>
+</html>
