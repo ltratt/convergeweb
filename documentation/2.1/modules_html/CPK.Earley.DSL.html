@@ -1,0 +1,32 @@
+<html>
+<head><title>CPK::Earley::DSL</title>
+<body>
+<p align="right"><a href="modsindex.html">Modules index</a>
+<hr>
+<h1 align="center">CPK::Earley::DSL</h1>
+
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="mk_parser"><code>func mk_parser(start_rule, extra_keywords, extra_symbols):</code></a>
+
+This is a DSL implementation function for building parsers according to an Earlry grammar, where text is parsed according to the normal Converge tokenizer. Extra keywords and extra symbols that the tokenizer should recognise can be passed as lists of strings. <code>start_rule</code> specifies the top rule of the grammar. This function returns a quasi-quoted function which when spliced in takes two arguments <code>dsl_block</code> and <code>src_infos</code> and returns a parse tree of the DSL block. An example use is as follows:
+<pre>
+parse := $&lt;&lt;DSL::mk_parser(&quot;rule&quot;, [&quot;tok&quot;, &quot;tok2&quot;], [])&gt;&gt;:
+    rule ::= a ( b )*
+    a ::= &quot;TOK&quot;
+        |
+    b ::= &quot;TOK2&quot;
+
+func my_dsl(dsl_block, src_infos)
+    parse_tree := parse(dsl_block, src_infos)
+    ...
+
+$&lt;&lt;my_dsl&gt;&gt;:
+    ...
+</pre>
+</div>
+
+
+<hr>
+<p align="right">cvd_to_html &copy;2006-2007 <A HRef = "http://tratt.net/laurie/">Laurence Tratt</A></p>
+</body>
+</html>

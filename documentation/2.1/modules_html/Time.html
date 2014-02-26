@@ -1,0 +1,34 @@
+<html>
+<head><title>Time</title>
+<body>
+<p align="right"><a href="modsindex.html">Modules index</a>
+<hr>
+<h1 align="center">Time</h1>
+
+<h3>Time objects</h3>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Instant"><code>class Instant</code></a>:<br>
+
+Denotes a specific instant in time.
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="Instant$$new"><code>func new(sec, nsec):</code></a>
+
+Creates a new time instant <code>sec</code> seconds + <code>nsec</code> nanoseconds since the local epoch.
+</div>
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="current"><code>func current():</code></a>
+
+Returns the current system time as an <code><a href="#Instant">Instant</a></code>. This function returns conventional <q>wall clock</q> time.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="current_mono"><code>func current_mono():</code></a>
+
+Returns the current system time as an <code><a href="#Instant">Instant</a></code>. This function guarantees to always return a monotonically increasing value; it is useful for timing purposes, as it is not skewed to reflect the realities of the outside world. Note: not all platforms support this functionality (e.g. OS X), in which case the value returned will be the same as <code><a href="#current">current</a></code>.
+</div>
+
+
+<hr>
+<p align="right">cvd_to_html &copy;2006-2007 <A HRef = "http://tratt.net/laurie/">Laurence Tratt</A></p>
+</body>
+</html>

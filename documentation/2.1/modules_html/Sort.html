@@ -1,0 +1,24 @@
+<html>
+<head><title>Sort</title>
+<body>
+<p align="right"><a href="modsindex.html">Modules index</a>
+<hr>
+<h1 align="center">Sort</h1>
+
+This module provides various sorting mechanisms.
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="sort"><code>func sort(list, comparison := func (x, y) { return x &lt; y }):</code></a>
+
+Sort <code>list</code> in place into the order determined by the <code>comparison</code> function using the quickest available sorting algorithm. Note that the sort is not guaranteed to be stable.
+</div>
+
+<div style="padding-left: 2em"><p style="text-indent: -1em" /><a name="heapsort"><code>func heapsort(list, comparison := func (x, y) { return x &lt; y }):</code></a>
+
+Sort <code>list</code> in place into the order determined by the <code>comparison</code> function using the non-stable heapsort algorithm.
+</div>
+
+
+<hr>
+<p align="right">cvd_to_html &copy;2006-2007 <A HRef = "http://tratt.net/laurie/">Laurence Tratt</A></p>
+</body>
+</html>
