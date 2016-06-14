@@ -1,4 +1,4 @@
-<!--#include virtual="/header.inc" -->
+<%include file="header.inc"/>
 
 <h2>Overview</h2>
 
@@ -15,7 +15,11 @@ Converge 2.1 is now <a href="releases/2.1/">available for download</a>.
 <h2>News <font size="-2">(<a href="news.html">all news</a>)</font></h2>
 
 <table>
-<!--#exec cmd="head -n 12 news" -->
+<%
+    f = open("templates/news", "r")
+    for i in range(12):
+        context.write(f.readline())
+%>
 </table>
 
-<!--#include virtual="/footer.inc" -->
+<%include file="footer.inc"/>
