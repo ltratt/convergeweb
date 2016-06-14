@@ -27,7 +27,7 @@
 
 <tr>
 <td id="header-bottom" align="center">
-<a href="/about.html">About</a> - <a href="/community.html">Community</a> - <a href="/documentation/">Documentation</a> - <a href="/releases/">Download</a> - <a href="/links.html">Links</a>
+<a href="/about.html">About</a> - <a href="/documentation/">Documentation</a> - <a href="/releases/">Download</a> - <a href="/links.html">Links</a>
 </td>
 </tr>
 
